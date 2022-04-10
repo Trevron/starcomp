@@ -2,6 +2,8 @@
 
 A planetary compendium for Star Wars.
 
+Try it out <a href="https://trevron.github.io/starcomp">here</a> when it's ready.
+
 ## Libraries
 ### React with Typescript
 Utilized create-react-app with the Typescript template.
