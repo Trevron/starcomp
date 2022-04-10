@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/starcomp/static/css/main.bad15762.css",
+    "main.js": "/starcomp/static/js/main.280c06a2.js",
+    "static/js/787.3d6cec75.chunk.js": "/starcomp/static/js/787.3d6cec75.chunk.js",
+    "static/media/deathstarish.png": "/starcomp/static/media/deathstarish.5c9e2f84d9423c146d2d.png",
+    "index.html": "/starcomp/index.html",
+    "main.bad15762.css.map": "/starcomp/static/css/main.bad15762.css.map",
+    "main.280c06a2.js.map": "/starcomp/static/js/main.280c06a2.js.map",
+    "787.3d6cec75.chunk.js.map": "/starcomp/static/js/787.3d6cec75.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bad15762.css",
+    "static/js/main.280c06a2.js"
+  ]
+}
