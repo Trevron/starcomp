@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {request, GraphQLClient} from 'graphql-request'
+
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
