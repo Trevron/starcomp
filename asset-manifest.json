@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/starcomp/static/css/main.ac49259e.css",
-    "main.js": "/starcomp/static/js/main.86de1fbe.js",
+    "main.css": "/starcomp/static/css/main.be05d8bc.css",
+    "main.js": "/starcomp/static/js/main.c1a05c02.js",
     "static/js/787.3d6cec75.chunk.js": "/starcomp/static/js/787.3d6cec75.chunk.js",
     "static/media/deathstarish.png": "/starcomp/static/media/deathstarish.5c9e2f84d9423c146d2d.png",
     "index.html": "/starcomp/index.html",
     "static/media/globe.svg": "/starcomp/static/media/globe.ad61f877bb84ebf2538cd388818a365c.svg",
     "static/media/menu.svg": "/starcomp/static/media/menu.644fa295fdd5f662e642ba6bfb084239.svg",
     "static/media/search.svg": "/starcomp/static/media/search.f9705ffe407455bd10ed6827af98d123.svg",
-    "main.ac49259e.css.map": "/starcomp/static/css/main.ac49259e.css.map",
-    "main.86de1fbe.js.map": "/starcomp/static/js/main.86de1fbe.js.map",
+    "main.be05d8bc.css.map": "/starcomp/static/css/main.be05d8bc.css.map",
+    "main.c1a05c02.js.map": "/starcomp/static/js/main.c1a05c02.js.map",
     "787.3d6cec75.chunk.js.map": "/starcomp/static/js/787.3d6cec75.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ac49259e.css",
-    "static/js/main.86de1fbe.js"
+    "static/css/main.be05d8bc.css",
+    "static/js/main.c1a05c02.js"
   ]
 }
