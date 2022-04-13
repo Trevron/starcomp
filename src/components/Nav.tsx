@@ -1,12 +1,12 @@
 import React from 'react'
-import {Link, Route, Routes} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {ReactComponent as MenuIcon} from '../menu.svg'
 import {ReactComponent as PlanetIcon} from '../globe.svg'
 import {ReactComponent as SearchIcon} from '../search.svg'
 
-type Props = {}
 
-export default function Nav({}: Props) {
+
+export default function Nav() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -16,7 +16,7 @@ export default function Nav({}: Props) {
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
               className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-              to="/"
+              to="/starcomp/"
             >
               STARCOMP
             </Link>

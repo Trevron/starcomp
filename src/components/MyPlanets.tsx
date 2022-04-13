@@ -34,10 +34,10 @@ function MyPlanets({}: Props) {
 
   return (
     <div className="text-gray-50">
-        <Card name="Test Planet" description="This is a big 'ol description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big 'ol description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big 'ol description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big 'ol description. This actually doesn't say anything, but it is still words." />
+        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
+        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
+        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
+        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
     </div>
   )
 }
