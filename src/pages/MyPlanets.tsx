@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react'
-import {request, gql} from 'graphql-request'
-import { PlanetType, AllPlanetsType } from '../types/Planet.types'
-import Card from '../components/Card'
-
-
-type Props = {}
+import React from "react";
+import { request, gql } from "graphql-request";
+import Card from "../components/Card";
+import planetStore from "../store/PlanetStore";
+import { observer } from "mobx-react-lite";
+import { Link } from "react-router-dom";
 
 const allPlanets = gql`
- query {
+  query {
     allPlanets {
       planets {
         name
@@ -18,30 +17,38 @@ const allPlanets = gql`
       }
     }
   }
-`
+`;
 
-function MyPlanets({}: Props) {
-
-    const [state, setState] = useState({} as AllPlanetsType);
-    //const list = state.planets.map(planet => <Card key={planet.id} name={planet.name} description={planet.id}/>)
-    
-
-    useEffect(() => {
-      request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets)
-      .then((data) => {
-        setState(data.allPlanets);
-      })
-      .catch((e) => console.log('There was an error.', e))
-    },);
-
+function MyPlanetsList() {
   return (
-    <div className="text-gray-50">
-        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
-        <Card name="Test Planet" description="This is a big ol' description. This actually doesn't say anything, but it is still words." />
+    <div className="">
+      {planetStore.planets.map((planet) => (
+        <Link to={`/planet/${planet.name}`}>
+        <Card
+          key={planet.id}
+          id={planet.id}
+          name={planet.name}
+          description={planet.description}
+          climates={planet.climates}
+          terrains={planet.terrains}
+          diameter={planet.diameter}
+          gravity={planet.gravity}
+        />
+        </Link>
+      ))}
     </div>
-  )
+  );
 }
 
-export default MyPlanets
+const MyPlanetsObserver = observer(MyPlanetsList);
+
+function MyPlanets() {
+  return (
+    <>
+      <h1 className="flex justify-center text-5xl text-gray-50">My Planets</h1>
+      <MyPlanetsObserver />
+    </>
+  );
+}
+
+export default MyPlanets;
