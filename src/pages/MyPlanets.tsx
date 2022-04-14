@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {request, gql} from 'graphql-request'
 import { PlanetType, AllPlanetsType } from '../types/Planet.types'
-import Card from './Card'
+import Card from '../components/Card'
+
 
 type Props = {}
 
@@ -23,6 +24,7 @@ function MyPlanets({}: Props) {
 
     const [state, setState] = useState({} as AllPlanetsType);
     //const list = state.planets.map(planet => <Card key={planet.id} name={planet.name} description={planet.id}/>)
+    
 
     useEffect(() => {
       request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets)

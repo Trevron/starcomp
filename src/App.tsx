@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './App.css';
-import ComingSoon from './components/ComingSoon';
+import ComingSoon from './pages/ComingSoon';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Nav from './components/Nav';
 
 
-import Search from './components/Search';
-import MyPlanets from './components/MyPlanets';
+import Search from './pages/Search';
+import MyPlanets from './pages/MyPlanets';
 
 
 
