@@ -1,12 +1,12 @@
 import React from "react";
 import { PlanetInterface } from "../store/PlanetStore";
 
-export default function ({
-  name,
-  description,
-  climates,
-  diameter,
-}: PlanetInterface) {
+type CardProps = {
+  planet: PlanetInterface;
+}
+
+export default function (props: CardProps) {
+  const {name, description, climates, diameter} = props.planet;
   return (
     <div className="w-3/4 my-5 mx-auto bg-slate-700 shadow-xl rounded-lg text-gray-50 flex flex-wrap flex-col">
       <div className="p-2">

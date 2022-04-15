@@ -5,35 +5,12 @@ import planetStore from "../store/PlanetStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-const allPlanets = gql`
-  query {
-    allPlanets {
-      planets {
-        name
-        id
-        climates
-        diameter
-        terrains
-      }
-    }
-  }
-`;
-
 function MyPlanetsList() {
   return (
     <div className="">
       {planetStore.planets.map((planet) => (
         <Link to={`/planet/${planet.name}`}>
-        <Card
-          key={planet.id}
-          id={planet.id}
-          name={planet.name}
-          description={planet.description}
-          climates={planet.climates}
-          terrains={planet.terrains}
-          diameter={planet.diameter}
-          gravity={planet.gravity}
-        />
+          <Card key={planet.id} planet={planet} />
         </Link>
       ))}
     </div>
