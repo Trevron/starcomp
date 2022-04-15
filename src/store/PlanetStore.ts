@@ -19,6 +19,12 @@ class PlanetStore {
     makeAutoObservable(this);
   }
 
+  public planetsSearch: PlanetInterface[] = [];
+
+  public setPlanetSearch = (planetsnew: PlanetInterface[]) => {
+    this.planetsSearch = planetsnew;
+  }
+
   public planets: PlanetInterface[] = [
     {
       id: "1231a",
