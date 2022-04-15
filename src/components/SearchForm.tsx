@@ -1,26 +1,46 @@
 import React from "react";
 import { useFormik } from "formik";
 
+
+
 function SearchForm() {
   const formik = useFormik({
     initialValues: {
       search: "",
     },
     onSubmit: (values) => {
-      console.log("Form data", values);
+      hideDetails();
     },
   });
+
+  
+
+  function showDetails() {;
+    const details = document.getElementById("search-details");
+    if (details && details.classList.contains("hidden")) {
+      details.classList.remove("hidden");
+    }
+  }
+
+  function hideDetails() {
+    const details = document.getElementById("search-details");
+    if (details && !details.classList.contains("hidden")) {
+      details.classList.add("hidden");
+    }
+  }
 
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
         <input
+          onFocus={showDetails}
           onChange={formik.handleChange}
           value={formik.values.search}
           type="text"
           name="search"
+          autoComplete="off"
+          placeholder="Search for a planet..."
           className="
-            dropdown-toggle
             form-control
             block
             w-full
@@ -38,14 +58,15 @@ function SearchForm() {
             focus:text-amber-400 focus:bg-slate-700 focus:border-amber-400 focus:outline-none"
         />
 
-        <div className="w-full bg-slate-700 py-2 px-1 dropdown-menu rounded flex justify-between content-center border border-amber-400">
-          <div className="flex flex-wrap flex-col text-amber-300">
+        <div id ="search-details" className="w-full bg-slate-700 py-2 px-1 rounded flex justify-between content-center border border-amber-400 hidden">
+          <div className="flex flex-wrap flex-col text-amber-400 accent-amber-500">
             <label htmlFor="Climate1">Climate 1</label>
             <input
               type="checkbox"
               id="Climate1"
               name="Climate1"
               value="Climate1"
+              className="accent-amber-500"
             />
             <label htmlFor="Climate2">Climate 2</label>
             <input
@@ -80,7 +101,7 @@ function SearchForm() {
               <option value="AZ">A to Z</option>
               <option value="ZA">Z to A</option>
             </select>
-            <button type="submit" className="border border-amber-400 rounded hover:bg-slate-700">
+            <button type="submit" className="border border-amber-400 rounded hover:bg-slate-800 focus:bg-amber-600">
                 Submit
             </button>
           </div>
