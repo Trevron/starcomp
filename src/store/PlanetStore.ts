@@ -25,6 +25,10 @@ class PlanetStore {
     this.planetsSearch = planetsnew;
   }
 
+  public filterSearch = () => {
+    this.planetsSearch = this.planetsSearch.filter(planet => planet.climates.includes('temperate'));
+  }
+
   public planets: PlanetInterface[] = [
     {
       id: "1231a",

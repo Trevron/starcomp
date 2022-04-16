@@ -17,7 +17,7 @@ export default function (props: CardProps) {
               <h3 className="font-bold text-amber-600">Climates</h3>
               <ul>
                 {climates.map((climate) => (
-                  <li>{climate}</li>
+                  <li>{climate.charAt(0).toUpperCase().concat(climate.slice(1))}</li>
                 ))}
               </ul>
             </div>

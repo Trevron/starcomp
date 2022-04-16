@@ -21,13 +21,18 @@ const allPlanets = gql`
 
 
 function Search() { 
+  let loaded = false;
+  useEffect(() =>{
+    if (!loaded) {
+      request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => planetStore.setPlanetSearch(data.allPlanets.planets));
+      loaded = true;
+    }
+  }, []);
 
-  // useEffect(() =>{
-  //   request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => planetStore.setPlanetSearch(data.allPlanets.planets));
-  // }, []);
 
   return (
     <div className="flex flex-col ">
+      <button onClick={planetStore.filterSearch}>Filter</button>
       <div className="text-gray-50 flex content-center align-center justify-center content-center">
           <SearchForm />
       </div>
