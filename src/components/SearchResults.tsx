@@ -1,14 +1,14 @@
 import React from "react";
 import { request, gql } from "graphql-request";
 import Card from "../components/Card";
-import planetStore from "../store/PlanetStore";
+import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 function SearchResultsList() {
   return (
     <div className="">
-      {planetStore.planetsSearch.map((planet) => (
+      {searchStore.planets.map((planet) => (
         // Regex replaces spaces with underscores
         <Link to={`/planet/${planet.name.replace(/ /g,"_")}`}> 
           <Card key={planet.id} planet={planet} />
@@ -18,14 +18,14 @@ function SearchResultsList() {
   );
 }
 
-const MyPlanetsObserver = observer(SearchResultsList);
+const SearchPlanetObserver = observer(SearchResultsList);
 
-function MyPlanets() {
+function SearchResults() {
   return (
     <>
-      <MyPlanetsObserver />
+      <SearchPlanetObserver />
     </>
   );
 }
 
-export default MyPlanets;
+export default SearchResults;
