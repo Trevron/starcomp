@@ -5,12 +5,12 @@ import planetStore from "../store/PlanetStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
-function MyPlanetsList() {
+function SearchResultsList() {
   return (
     <div className="">
-      {planetStore.planets.map((planet) => (
+      {planetStore.planetsSearch.map((planet) => (
         // Regex replaces spaces with underscores
-        <Link to={`/planet/${planet.name.replace(/ /g,"_")}`}>
+        <Link to={`/planet/${planet.name.replace(/ /g,"_")}`}> 
           <Card key={planet.id} planet={planet} />
         </Link>
       ))}
@@ -18,12 +18,11 @@ function MyPlanetsList() {
   );
 }
 
-const MyPlanetsObserver = observer(MyPlanetsList);
+const MyPlanetsObserver = observer(SearchResultsList);
 
 function MyPlanets() {
   return (
     <>
-      <h1 className="flex justify-center text-5xl text-gray-50">My Planets</h1>
       <MyPlanetsObserver />
     </>
   );

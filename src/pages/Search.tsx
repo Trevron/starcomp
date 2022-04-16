@@ -3,6 +3,7 @@ import { gql, request } from 'graphql-request';
 import SearchForm from '../components/SearchForm';
 import planetStore from '../store/PlanetStore';
 import Card from '../components/Card';
+import SearchResults from '../components/SearchResults';
 
 const allPlanets = gql`
     query {
@@ -21,9 +22,9 @@ const allPlanets = gql`
 
 function Search() { 
 
-  useEffect(() =>{
-    request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => planetStore.setPlanetSearch(data.allPlanets.planets));
-  }, []);
+  // useEffect(() =>{
+  //   request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => planetStore.setPlanetSearch(data.allPlanets.planets));
+  // }, []);
 
   return (
     <div className="flex flex-col ">
@@ -31,10 +32,8 @@ function Search() {
           <SearchForm />
       </div>
       <div>
-            {
-              planetStore.planetsSearch.map(planet => <Card key={planet.id} planet={planet}/>)
-            }
-          </div>
+          <SearchResults />
+      </div>
     </div>
   )
 }
