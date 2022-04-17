@@ -10,17 +10,45 @@ class SearchStore {
 
   public setPlanets = (newPlanets: PlanetInterface[]) => {
     this.planets = newPlanets;
-  }
+  };
 
-  public filterSearch = () => {
-    this.planets = this.planets.filter(planet => planet.climates.includes('temperate'));
-  }
+  public filterSearch = (climates: []) => {
+    const filtered = this.planets.filter((planet) =>
+      climates.some((climate) => planet.climates.includes(climate))
+    );
+    this.planets = filtered;
+  };
 
-  public sortSearch = () => {
-      const sortedPlanets = this.planets.sort((a, b) => (a.name > b.name) ? 1 : -1); 
-      this.planets = sortedPlanets;
-  }
+  public searchInput = (input: string) => {
+    const filtered = this.planets.filter((planet) =>
+      planet.name.toLowerCase().includes(input)
+    );
+    this.planets = filtered;
+  };
 
+  public sortSearch = (sortBy: string) => {
+    switch (sortBy) {
+      case "default":
+        this.planets = this.planets.sort((a, b) => (a.name > b.name ? 1 : -1));
+        break;
+
+      case "reverse":
+        this.planets = this.planets.sort((a, b) => (a.name < b.name ? 1 : -1));
+        break;
+
+      case "size":
+        this.planets = this.planets.sort((a, b) =>
+          a.diameter > b.diameter ? 1 : -1
+        );
+        break;
+
+      case "size-desc":
+        this.planets = this.planets.sort((a, b) =>
+          a.diameter < b.diameter ? 1 : -1
+        );
+        break;
+    }
+  };
 }
 
 const searchStore = new SearchStore();
