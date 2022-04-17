@@ -14,9 +14,24 @@ export interface PlanetInterface {
   saved?: boolean;
 }
 
+type PlanetProps = {
+  planet: PlanetInterface;
+}
+
 class PlanetStore {
   constructor() {
     makeAutoObservable(this);
+  }
+
+  private selectedPlanetID: string = "1231a";
+
+  public setSelectedPlanet = (id: string) => {
+    this.selectedPlanetID = id;
+  }
+
+  public getSelectedPlanet = () => {
+    const planet = this.planets.filter(planet => planet.id === this.selectedPlanetID);
+    return planet;
   }
 
   public planets: PlanetInterface[] = [

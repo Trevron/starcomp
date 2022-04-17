@@ -1,7 +1,22 @@
 import React, { useEffect } from "react";
 import { useFormik } from "formik";
-import planetStore from "../store/PlanetStore";
+import searchStore from "../store/SearchStore";
+import {request, gql} from "graphql-request";
 
+
+const allPlanets = gql`
+    query {
+      allPlanets {
+        planets {
+          name
+          id
+          climates
+          diameter
+          terrains
+        }
+      }
+    }
+  `;
 
 function SearchForm() {
   const formik = useFormik({
@@ -11,7 +26,11 @@ function SearchForm() {
     },
     onSubmit: (values) => {
       hideDetails();
-
+      request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => {
+        searchStore.setPlanets(data.allPlanets.planets);
+        searchStore.sortSearch();
+      });
+      
     },
   });
 

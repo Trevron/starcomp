@@ -16,6 +16,11 @@ class SearchStore {
     this.planets = this.planets.filter(planet => planet.climates.includes('temperate'));
   }
 
+  public sortSearch = () => {
+      const sortedPlanets = this.planets.sort((a, b) => (a.name > b.name) ? 1 : -1); 
+      this.planets = sortedPlanets;
+  }
+
 }
 
 const searchStore = new SearchStore();

@@ -4,29 +4,29 @@ import SearchForm from '../components/SearchForm';
 import searchStore from '../store/SearchStore';
 import SearchResults from '../components/SearchResults';
 
-const allPlanets = gql`
-    query {
-      allPlanets {
-        planets {
-          name
-          id
-          climates
-          diameter
-          terrains
-        }
-      }
-    }
-  `;
+// const allPlanets = gql`
+//     query {
+//       allPlanets {
+//         planets {
+//           name
+//           id
+//           climates
+//           diameter
+//           terrains
+//         }
+//       }
+//     }
+//   `;
 
 
 function Search() { 
-  let loaded = false;
-  useEffect(() =>{
-    if (!loaded) {
-      request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => searchStore.setPlanets(data.allPlanets.planets));
-      loaded = true;
-    }
-  }, []);
+  // let loaded = false;
+  // useEffect(() =>{
+  //   if (!loaded) {
+  //     request('https://swapi-graphql.netlify.app/.netlify/functions/index', allPlanets).then(data => searchStore.setPlanets(data.allPlanets.planets));
+  //     loaded = true;
+  //   }
+  // }, []);
 
 
   return (
