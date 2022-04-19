@@ -6,12 +6,13 @@ import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
 function SearchResultsList() {
+  
   return (
     <div className="">
       {searchStore.planets.map((planet) => (
         // Regex replaces spaces with underscores
-        <Link to={`/planet/${planet.name.replace(/ /g,"_")}`}> 
-          <Card key={planet.id} planet={planet} />
+        <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/search"}}> 
+          <Card  planet={planet} />
         </Link>
       ))}
     </div>

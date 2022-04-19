@@ -20,7 +20,7 @@ function App() {
         <Route path="/starcomp" element={<ComingSoon />} />
         <Route path="/search" element={<Search />} />
         <Route path="/myplanets" element={<MyPlanets />} />
-        <Route path="/planet" element={<Planet />} />
+        <Route path="/planet/:planet" element={<Planet />} />
       </Routes>
     </div>
   );

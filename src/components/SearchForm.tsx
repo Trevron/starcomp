@@ -83,7 +83,7 @@ function SearchForm() {
             focus:text-amber-400 focus:bg-slate-700 
             focus:border-amber-400 focus:outline-none"
         />
-
+        
         <div
           id="search-details"
           className="
@@ -99,8 +99,7 @@ function SearchForm() {
             hidden"
         >
           <div className="flex flex-wrap flex-col text-amber-400 accent-amber-500 p-2">
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="arid">Arid</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="arid"
@@ -108,9 +107,9 @@ function SearchForm() {
                 value="arid"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="arid">Arid</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="temperate">Temperate</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="temperate"
@@ -118,9 +117,9 @@ function SearchForm() {
                 value="temperate"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="temperate">Temperate</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="tropical">Tropical</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="tropical"
@@ -128,9 +127,9 @@ function SearchForm() {
                 value="tropical"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="tropical">Tropical</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="frozen">Frozen</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="frozen"
@@ -138,9 +137,9 @@ function SearchForm() {
                 value="frozen"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="frozen">Frozen</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="murky">Murky</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="murky"
@@ -148,9 +147,9 @@ function SearchForm() {
                 value="murky"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="murky">Murky</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="windy">Windy</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="windy"
@@ -158,9 +157,9 @@ function SearchForm() {
                 value="windy"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="windy">Windy</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="artificialTemperate">Artificial</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="artificialTemperate"
@@ -168,9 +167,9 @@ function SearchForm() {
                 value="artificial temperate"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="artificialTemperate">Artificial</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="hot">Hot</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="hot"
@@ -178,9 +177,9 @@ function SearchForm() {
                 value="hot"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="hot">Hot</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="frigid">Frigid</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="frigid"
@@ -188,9 +187,9 @@ function SearchForm() {
                 value="frigid"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="frigid">Frigid</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="humid">Humid</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="humid"
@@ -198,9 +197,9 @@ function SearchForm() {
                 value="humid"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="humid">Humid</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="moist">Moist</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="moist"
@@ -208,9 +207,9 @@ function SearchForm() {
                 value="moist"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="moist">Moist</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="polluted">Polluted</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="polluted"
@@ -218,9 +217,9 @@ function SearchForm() {
                 value="polluted"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="polluted">Polluted</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="unknown">Unknown</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="unknown"
@@ -228,9 +227,9 @@ function SearchForm() {
                 value="unknown"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="unknown">Unknown</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="subartic">Subartic</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="subartic"
@@ -238,9 +237,9 @@ function SearchForm() {
                 value="subartic"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="subartic">Subartic</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="artic">Artic</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="artic"
@@ -248,9 +247,9 @@ function SearchForm() {
                 value="artic"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="artic">Artic</label>
             </div>
-            <div className="flex content-center flex-col self-center">
-              <label htmlFor="rocky">Rocky</label>
+            <div className="flex content-center flex-row">
               <input
                 type="checkbox"
                 id="rocky"
@@ -258,6 +257,7 @@ function SearchForm() {
                 value="rocky"
                 onChange={formik.handleChange}
               />
+              <label className="mx-2" htmlFor="rocky">Rocky</label>
             </div>
           </div>
           <div className="flex flex-col justify-between">

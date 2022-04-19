@@ -10,9 +10,10 @@ function MyPlanetsList() {
     <div className="">
       {planetStore.planets.map((planet) => (
         // Regex replaces spaces with underscores
-        <Link to={`/planet/${planet.name.replace(/ /g,"_")}`}>
+        <Link to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{planetName: planet}}>
           <Card key={planet.id} planet={planet} />
         </Link>
+        
       ))}
     </div>
   );
