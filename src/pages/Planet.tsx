@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { PlanetInterface } from "../store/PlanetStore";
+import planetStore, { PlanetInterface } from "../store/PlanetStore";
 import { request, gql } from "graphql-request";
 import { useLocation, Location } from "react-router-dom";
 import searchStore from "../store/SearchStore";
@@ -23,6 +23,14 @@ function PlanetDetails() {
       climates
       diameter
       terrains
+      residentConnection{
+        residents {
+          name
+          gender
+          height
+          birthYear      
+        }
+      }
     }
   }
   `;
@@ -45,6 +53,15 @@ function PlanetDetails() {
     loading?.classList.add("hidden");
   }
 
+  const handleAddClick = () => {
+    if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
+      // Remove planet from planet store
+    } else {
+      // Add planet to planet store
+      planetStore.addPlanet(searchStore.getSelectedPlanet());
+    }
+  }
+
   if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="mx-2">
@@ -55,6 +72,13 @@ function PlanetDetails() {
           Loading
         </h1>
         <div id="planet-details" className="hidden text-gray-50">
+          <button 
+            type="button"
+            onClick={handleAddClick} 
+            className="text-amber-400 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+          >
+            Add Planet
+          </button>
           <h1 className="text-5xl text-amber-400 font-bold">
             {searchStore.getSelectedPlanet().name}
           </h1>

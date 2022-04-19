@@ -23,60 +23,11 @@ class PlanetStore {
     makeAutoObservable(this);
   }
 
-  private selectedPlanetID: string = "1231a";
+  public planets: PlanetInterface[] = [];
 
-  public setSelectedPlanet = (id: string) => {
-    this.selectedPlanetID = id;
+  public planetExists(id: string) {
+    return this.planets.some(planet => planet.id === id);
   }
-
-  public getSelectedPlanet = () => {
-    const planet = this.planets.filter(planet => planet.id === this.selectedPlanetID);
-    return planet;
-  }
-
-  public planets: PlanetInterface[] = [
-    {
-      id: "1231a",
-      name: "Dantooine",
-      climates: ["Wet", "Wetter"],
-      diameter: 10,
-      terrains: ["Big", "Small"],
-      description: "This is a description",
-      people: [
-        {
-          name: "Boblawblaw",
-          gender: "Male",
-          height: 10,
-          born: "200",
-          planetID: "1231a",
-          id: "12s",
-        },
-      ],
-      population: 1058564,
-      gravity: "A lot.",
-      saved: true,
-    },
-    {
-      id: "1sdfsa",
-      name: "Alderan",
-      climates: ["Cold", "Hot"],
-      diameter: 10,
-      terrains: ["Wooded", "Barren"],
-      people: [
-        {
-          name: "Boblawblaw",
-          gender: "Male",
-          height: 10,
-          born: "200",
-          planetID: "1sdfsa",
-          id: "10a",
-        },
-      ],
-      population: 1058564,
-      gravity: "A lot.",
-      saved: true,
-    },
-  ];
 
   public addPlanet = (planet: PlanetInterface) => {
     this.planets.push(planet);

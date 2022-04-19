@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import searchStore from "../store/SearchStore";
 import { request, gql } from "graphql-request";
+import { PlanetInterface } from "../store/PlanetStore";
 
 const allPlanets = gql`
   query {
@@ -36,7 +37,8 @@ function SearchForm() {
         if (formik.values.climate.length > 0) {
           searchStore.filterSearch(formik.values.climate as []);
         }
-      });
+      })
+      .catch(error => console.log("There was a problem retrieving the data.", error));
     },
   });
 
