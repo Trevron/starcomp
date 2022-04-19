@@ -23,7 +23,7 @@ export default function (props: CardProps) {
             </div>
             <div>
               <h3 className="font-bold text-amber-600">Diameter</h3>
-              <p>{diameter}</p>
+              <p>{diameter || "Unknown"}</p>
             </div>
           </div>
         </div>

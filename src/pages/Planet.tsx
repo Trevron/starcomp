@@ -34,7 +34,8 @@ function PlanetDetails() {
     ).then((data) => {
       searchStore.setSelectedPlanet(data.planet);
       doneLoading();
-    });
+    })
+    .catch(error => console.log("There was a problem requesting data.", error));
   }, []);
 
   function doneLoading() {
@@ -44,51 +45,59 @@ function PlanetDetails() {
     loading?.classList.add("hidden");
   }
 
-  return (
-    <div className="mx-2">
-      <h1
-        id="loading"
-        className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
-      >
-        Loading
-      </h1>
-      <div id="planet-details" className="hidden text-gray-50">
-        <h1 className="text-5xl text-amber-400 font-bold">
-          {searchStore.getSelectedPlanet().name}
+  if (searchStore.getSelectedPlanet().climates !== undefined) {
+    return (
+      <div className="mx-2">
+        <h1
+          id="loading"
+          className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
+        >
+          Loading
         </h1>
-        <div>
-          <h2 className="text-amber-600 font-bold">Description</h2>
-          <p>
-            {searchStore.getSelectedPlanet().description || "No description."}
-          </p>
-        </div>
-        <div>
-          <h2 className="text-amber-600 font-bold">Diameter</h2>
-          <p>{searchStore.getSelectedPlanet().diameter || "Unknown."}</p>
-        </div>
-        <div>
-          <h2 className="text-amber-600 font-bold">Climates</h2>
-          <ul>
-            {searchStore.getSelectedPlanet().climates.map((climate) => (
-              <li key={climate}>
-                {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-amber-600 font-bold">Terrains</h2>
-          <ul className="">
-            {searchStore.getSelectedPlanet().terrains.map((terrain) => (
-              <li>
-                {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
-              </li>
-            ))}
-          </ul>
+        <div id="planet-details" className="hidden text-gray-50">
+          <h1 className="text-5xl text-amber-400 font-bold">
+            {searchStore.getSelectedPlanet().name}
+          </h1>
+          <div>
+            <h2 className="text-amber-600 font-bold">Description</h2>
+            <p>
+              {searchStore.getSelectedPlanet().description || "No description."}
+            </p>
+          </div>
+          <div>
+            <h2 className="text-amber-600 font-bold">Diameter</h2>
+            <p>{searchStore.getSelectedPlanet().diameter || "Unknown."}</p>
+          </div>
+          <div>
+            <h2 className="text-amber-600 font-bold">Climates</h2>
+            <ul>
+              {searchStore.getSelectedPlanet().climates.map((climate) => (
+                <li key={climate}>
+                  {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-amber-600 font-bold">Terrains</h2>
+            <ul className="">
+              {searchStore.getSelectedPlanet().terrains.map((terrain) => (
+                <li>
+                  {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
+        Loading
+      </h1>
+    )
+  }
 }
 
 const PlanetDetailsObserver = observer(PlanetDetails);
