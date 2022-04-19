@@ -5,6 +5,11 @@ import planetStore from "../store/PlanetStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
+/**
+ *  Observed list of saved planets
+ * 
+ */
+
 function MyPlanetsList() {
   return (
     <div className="">
@@ -13,7 +18,6 @@ function MyPlanetsList() {
         <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/myplanets"}}>
           <Card planet={planet} />
         </Link>
-        
       ))}
     </div>
   );

@@ -1,6 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { PlanetInterface } from "./PlanetStore";
 
+/**
+ *  Search store and data model.
+ *  TODO:
+ *    Restructure and simplify Stores.  
+ */
+
 class SearchStore {
   constructor() {
     makeAutoObservable(this);

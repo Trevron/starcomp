@@ -4,9 +4,11 @@ import {ReactComponent as MenuIcon} from '../menu.svg'
 import {ReactComponent as PlanetIcon} from '../globe.svg'
 import {ReactComponent as SearchIcon} from '../search.svg'
 
+/**
+ *  Navigation bar component
+ */
 
-
-export default function Nav() {
+function Nav() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -60,3 +62,5 @@ export default function Nav() {
     </>
   )
 }
+
+export default Nav;

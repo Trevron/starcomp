@@ -4,6 +4,11 @@ import SearchForm from "../components/SearchForm";
 import searchStore from "../store/SearchStore";
 import SearchResults from "../components/SearchResults";
 
+/**
+ *  Search page
+ * 
+ */
+
 function Search() {
   return (
     <div className="flex flex-col ">

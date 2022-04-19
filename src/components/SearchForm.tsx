@@ -4,6 +4,14 @@ import searchStore from "../store/SearchStore";
 import { request, gql } from "graphql-request";
 import { PlanetInterface } from "../store/PlanetStore";
 
+/*
+  Search form component
+  TODO:
+    Clean up hard coded data.
+    Fix style.
+*/
+
+
 const allPlanets = gql`
   query {
     allPlanets {

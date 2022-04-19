@@ -1,6 +1,12 @@
 import React from "react";
 import { PlanetInterface } from "../store/PlanetStore";
 
+/**
+ *  Card for planets
+ *  TODO:
+ *    Style needs work.
+ */
+
 type CardProps = {
   planet: PlanetInterface;
 }

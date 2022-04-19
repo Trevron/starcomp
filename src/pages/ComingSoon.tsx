@@ -3,6 +3,11 @@ import deathstar from '../deathstarish.png'
 
 type Props = {}
 
+/**
+ *  Landing page while in development
+ * 
+ */
+
 export default function ComingSoon({}: Props) {
   return (
     <div className="text-gray-50">

@@ -1,3 +1,10 @@
+
+/**
+ *  Storage and data model for residents/
+ *  TODO:
+ *    Full restructure. Not tested or implemented yet.
+ */
+
 export interface PersonInterface {
   id: string;
   planetID: string;

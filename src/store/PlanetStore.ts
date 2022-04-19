@@ -1,6 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import { PersonInterface } from "./PeopleStore";
 
+/**
+ * This contains the Planet data model as well as the planet store.
+ * TODO:
+ *  Restructure the Stores and clean up the data model.
+ */
+
 export interface PlanetInterface {
   id: string;
   name: string;

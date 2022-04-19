@@ -5,6 +5,15 @@ import { useLocation, Location } from "react-router-dom";
 import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 
+/*
+    Planet details page.
+    TODO:
+      Add place for resident cards.
+      Add button for adding a resident.
+      Make modal and resident cards.
+      Styling.
+*/
+
 type LocationProps = {
   state: {
     id: string;
@@ -33,7 +42,7 @@ function PlanetDetails() {
     }
   }
   `;
-  
+  // Check if planet is already saved, if not Query the SWAPI
   useEffect(() => {
     if (planetStore.planetExists(location.state.id)) {
       searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
@@ -85,7 +94,7 @@ function PlanetDetails() {
     }
   }
 
-
+  // Make sure planet object is working before render.
   if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">

@@ -5,8 +5,12 @@ import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 
+/**
+ *  Observable list of planets for the Search page and store
+ * 
+ */
+
 function SearchResultsList() {
-  
   return (
     <div className="">
       {searchStore.planets.map((planet) => (
