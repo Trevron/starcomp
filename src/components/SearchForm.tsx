@@ -57,7 +57,7 @@ function SearchForm() {
   }
 
   return (
-    <div className="w-3/4">
+    <div className="lg:w-1/2 w-3/4">
       <form onSubmit={formik.handleSubmit}>
         <input
           onFocus={showDetails}

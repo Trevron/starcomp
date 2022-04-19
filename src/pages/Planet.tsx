@@ -36,7 +36,6 @@ function PlanetDetails() {
   
   useEffect(() => {
     if (planetStore.planetExists(location.state.id)) {
-      console.log(planetStore.getPlanet(location.state.id));
       searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
       doneLoading();
     } else {
@@ -89,54 +88,59 @@ function PlanetDetails() {
 
   if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
-      <div className="mx-2">
-        <h1
-          id="loading"
-          className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
-        >
-          Loading
-        </h1>
-        <div id="planet-details" className="hidden text-gray-50">
-          <button 
-            type="button"
-            id="save-planet-button"
-            onClick={handleSavePlanetClick} 
-            className="text-gray-50 bg-emerald-800 w-24 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+      <div className="w-full flex flex-wrap justify-center">
+        <div className="px-2 w-1/2 flex flex-col">
+          <h1
+            id="loading"
+            className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
           >
-            Save Planet
-          </button>
-          <h1 className="text-5xl text-amber-400 font-bold">
-            {searchStore.getSelectedPlanet().name}
+            Loading
           </h1>
-          <div>
-            <h2 className="text-amber-600 font-bold">Description</h2>
-            <p>
-              {searchStore.getSelectedPlanet().description || "No description."}
-            </p>
-          </div>
-          <div>
-            <h2 className="text-amber-600 font-bold">Diameter</h2>
-            <p>{searchStore.getSelectedPlanet().diameter || "Unknown."}</p>
-          </div>
-          <div>
-            <h2 className="text-amber-600 font-bold">Climates</h2>
-            <ul>
-              {searchStore.getSelectedPlanet().climates.map((climate) => (
-                <li key={climate}>
-                  {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h2 className="text-amber-600 font-bold">Terrains</h2>
-            <ul className="">
-              {searchStore.getSelectedPlanet().terrains.map((terrain) => (
-                <li key={terrain}>
-                  {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
-                </li>
-              ))}
-            </ul>
+          <div id="planet-details" className="hidden text-gray-50">
+            <div className="flex justify-between">
+              <h1 className="text-5xl text-amber-400 font-bold">
+                {searchStore.getSelectedPlanet().name}
+              </h1>
+              <button 
+                type="button"
+                id="save-planet-button"
+                onClick={handleSavePlanetClick} 
+                className="text-gray-50 bg-emerald-800 w-24 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+              >
+                Save Planet
+              </button>
+              
+            </div>
+            <div>
+              <h2 className="text-amber-600 font-bold">Description</h2>
+              <p>
+                {searchStore.getSelectedPlanet().description || "No description."}
+              </p>
+            </div>
+            <div>
+              <h2 className="text-amber-600 font-bold">Diameter</h2>
+              <p>{searchStore.getSelectedPlanet().diameter || "Unknown."}</p>
+            </div>
+            <div>
+              <h2 className="text-amber-600 font-bold">Climates</h2>
+              <ul>
+                {searchStore.getSelectedPlanet().climates.map((climate) => (
+                  <li key={climate}>
+                    {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-amber-600 font-bold">Terrains</h2>
+              <ul className="">
+                {searchStore.getSelectedPlanet().terrains.map((terrain) => (
+                  <li key={terrain}>
+                    {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -144,7 +148,7 @@ function PlanetDetails() {
   } else {
     return (
       <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
-        ERROR
+        Loading
       </h1>
     )
   }
