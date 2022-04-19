@@ -82,7 +82,7 @@ function PlanetDetails() {
             <h2 className="text-amber-600 font-bold">Terrains</h2>
             <ul className="">
               {searchStore.getSelectedPlanet().terrains.map((terrain) => (
-                <li>
+                <li key={terrain}>
                   {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
                 </li>
               ))}
