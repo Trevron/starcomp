@@ -26,7 +26,14 @@ class PlanetStore {
   public planets: PlanetInterface[] = [];
 
   public planetExists(id: string) {
-    return this.planets.some(planet => planet.id === id);
+    return (this.planets.some(planet => planet.id === id));
+  }
+  
+  public getPlanet(id: string): PlanetInterface {
+    if (this.planets.find(planet => planet.id === id)) {
+      return this.planets.find(planet => planet.id === id) as PlanetInterface;
+    }
+    return {} as PlanetInterface;
   }
 
   public addPlanet = (planet: PlanetInterface) => {

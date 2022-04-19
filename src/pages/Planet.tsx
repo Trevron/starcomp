@@ -14,7 +14,6 @@ type LocationProps = {
 
 function PlanetDetails() {
   const location = useLocation() as LocationProps;
-
   const planetQuery = gql`
   query {
     planet(id: "${location.state.id}") {
@@ -34,33 +33,59 @@ function PlanetDetails() {
     }
   }
   `;
-
+  
   useEffect(() => {
-    request(
-      "https://swapi-graphql.netlify.app/.netlify/functions/index",
-      planetQuery
-    ).then((data) => {
-      searchStore.setSelectedPlanet(data.planet);
+    if (planetStore.planetExists(location.state.id)) {
+      console.log(planetStore.getPlanet(location.state.id));
+      searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
       doneLoading();
-    })
-    .catch(error => console.log("There was a problem requesting data.", error));
+    } else {
+      request(
+        "https://swapi-graphql.netlify.app/.netlify/functions/index",
+        planetQuery
+      ).then((data) => {
+        searchStore.setSelectedPlanet(data.planet);
+        doneLoading();
+      })
+      .catch(error => console.log("There was a problem requesting data.", error));
+    }
   }, []);
 
   function doneLoading() {
+    toggleSaveButton();
     const main = document.getElementById("planet-details");
     const loading = document.getElementById("loading");
     main?.classList.remove("hidden");
     loading?.classList.add("hidden");
   }
 
-  const handleAddClick = () => {
+  const handleSavePlanetClick = () => {
+    // const savePlanetButton = document.getElementById("save-planet-button");
     if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
       // Remove planet from planet store
+      planetStore.deletePlanet(searchStore.getSelectedPlanet().id);   
     } else {
       // Add planet to planet store
       planetStore.addPlanet(searchStore.getSelectedPlanet());
     }
+    toggleSaveButton();
   }
+
+  function toggleSaveButton() {
+    const savePlanetButton = document.getElementById("save-planet-button");
+    if (savePlanetButton !== null) {
+      if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
+        savePlanetButton.classList.add("bg-red-800");
+        savePlanetButton.classList.remove("bg-emerald-800");
+        savePlanetButton.textContent = "Delete";
+      } else {
+        savePlanetButton.classList.add("bg-emerald-800");
+        savePlanetButton.classList.remove("bg-red-800");
+        savePlanetButton.textContent = "Save";
+      }
+    }
+  }
+
 
   if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
@@ -74,10 +99,11 @@ function PlanetDetails() {
         <div id="planet-details" className="hidden text-gray-50">
           <button 
             type="button"
-            onClick={handleAddClick} 
-            className="text-amber-400 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+            id="save-planet-button"
+            onClick={handleSavePlanetClick} 
+            className="text-gray-50 bg-emerald-800 w-24 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
           >
-            Add Planet
+            Save Planet
           </button>
           <h1 className="text-5xl text-amber-400 font-bold">
             {searchStore.getSelectedPlanet().name}
@@ -118,7 +144,7 @@ function PlanetDetails() {
   } else {
     return (
       <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
-        Loading
+        ERROR
       </h1>
     )
   }
