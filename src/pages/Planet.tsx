@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import planetStore, { PlanetInterface } from "../store/PlanetStore";
 import { request, gql } from "graphql-request";
 import { useLocation, Location } from "react-router-dom";
 import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
+import InputModal from "../components/InputModal";
 
 /*
     Planet details page.
     TODO:
       Add place for resident cards.
       Add button for adding a resident.
-      Make modal and resident cards.
+      Make resident cards.
       Styling.
+      Disable delete while modal is open.
 */
 
 type LocationProps = {
@@ -22,7 +24,9 @@ type LocationProps = {
 };
 
 function PlanetDetails() {
+
   const location = useLocation() as LocationProps;
+
   const planetQuery = gql`
   query {
     planet(id: "${location.state.id}") {
@@ -42,10 +46,12 @@ function PlanetDetails() {
     }
   }
   `;
+
   // Check if planet is already saved, if not Query the SWAPI
   useEffect(() => {
     if (planetStore.planetExists(location.state.id)) {
       searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
+      setCanAdd(true);
       doneLoading();
     } else {
       request(
@@ -71,10 +77,12 @@ function PlanetDetails() {
     // const savePlanetButton = document.getElementById("save-planet-button");
     if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
       // Remove planet from planet store
-      planetStore.deletePlanet(searchStore.getSelectedPlanet().id);   
+      planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
+      setCanAdd(false);   
     } else {
       // Add planet to planet store
       planetStore.addPlanet(searchStore.getSelectedPlanet());
+      setCanAdd(true);
     }
     toggleSaveButton();
   }
@@ -93,6 +101,20 @@ function PlanetDetails() {
       }
     }
   }
+
+  // Div for the button to add residents
+  const [canAdd, setCanAdd] = useState(false);
+  const residentButtonClass = canAdd ? "visible" : "hidden";
+
+  // Modal for resident input
+  const [show, setShow] = useState(false)
+  const showModal = () => {
+    setShow(true);
+  }
+  const hideModal = () => {
+    setShow(false);
+  }
+
 
   // Make sure planet object is working before render.
   if (searchStore.getSelectedPlanet().climates !== undefined) {
@@ -150,6 +172,15 @@ function PlanetDetails() {
                 ))}
               </ul>
             </div>
+          </div>
+          <div id="resident-add" className={residentButtonClass}>
+            <InputModal show={show} handleClose={hideModal} planetID={location.state.id} />
+            <button type="button" onClick={showModal} className="text-amber-400 font-bold p-1 border border-amber-400 rounded hover:bg-amber-400 hover:text-gray-50">
+              Add Resident
+            </button>
+          </div>
+          <div id="resident-cards">
+              <h2>Residents</h2>
           </div>
         </div>
       </div>
