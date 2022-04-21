@@ -5,15 +5,15 @@ import { useLocation, Location } from "react-router-dom";
 import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import InputModal from "../components/InputModal";
+import ResidentsList from "../components/ResidentsList";
+import { ResidentInterface } from "../model/Resident";
 
 /*
     Planet details page.
     TODO:
-      Add place for resident cards.
-      Add button for adding a resident.
-      Make resident cards.
       Styling.
       Disable delete while modal is open.
+      Huge rework. Need to decouple a lot of things on this page.
 */
 
 type LocationProps = {
@@ -115,6 +115,15 @@ function PlanetDetails() {
     setShow(false);
   }
 
+  // Save the person from the modal
+  // This is indicative of the requirement for rework
+  const saveResident = (resident: ResidentInterface) => {
+    // if (planetStore.getPlanet(location.state.id) === undefined) {
+    //   planetStore.setResidents(location.state.id, []);
+    // }
+    planetStore.addResident(location.state.id, resident);    
+  }
+
 
   // Make sure planet object is working before render.
   if (searchStore.getSelectedPlanet().climates !== undefined) {
@@ -128,7 +137,7 @@ function PlanetDetails() {
             Loading
           </h1>
           <div id="planet-details" className="hidden text-gray-50">
-            <div className="flex justify-between">
+            <div className="flex justify-between gap-x-1 flex-col md:flex-row">
               <h1 className="text-5xl text-amber-400 font-bold">
                 {searchStore.getSelectedPlanet().name}
               </h1>
@@ -136,7 +145,7 @@ function PlanetDetails() {
                 type="button"
                 id="save-planet-button"
                 onClick={handleSavePlanetClick} 
-                className="text-gray-50 bg-emerald-800 w-24 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+                className="text-gray-50 bg-emerald-800 w-24 min-w-[6rem] max-h-12 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
               >
                 Save Planet
               </button>
@@ -172,16 +181,21 @@ function PlanetDetails() {
                 ))}
               </ul>
             </div>
+
+          <div id="resident-cards">
+            <h2 className="text-amber-600 font-bold">Residents</h2>
+              <ResidentsList planet={searchStore.getSelectedPlanet()} />
           </div>
+
           <div id="resident-add" className={residentButtonClass}>
-            <InputModal show={show} handleClose={hideModal} planetID={location.state.id} />
-            <button type="button" onClick={showModal} className="text-amber-400 font-bold p-1 border border-amber-400 rounded hover:bg-amber-400 hover:text-gray-50">
+            <InputModal show={show} handleClose={hideModal} planetID={location.state.id} handleSave={saveResident} />
+            <button type="button" onClick={showModal} className="text-amber-400 my-2 font-bold p-2 border border-amber-400 rounded hover:bg-amber-400 hover:text-gray-50">
               Add Resident
             </button>
           </div>
-          <div id="resident-cards">
-              <h2>Residents</h2>
+
           </div>
+          
         </div>
       </div>
     );

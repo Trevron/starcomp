@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { PersonInterface } from "./PeopleStore";
+import { ResidentInterface } from "../model/Resident";
 
 /**
  * This contains the Planet data model as well as the planet store.
@@ -14,10 +14,14 @@ export interface PlanetInterface {
   diameter: number;
   terrains: string[];
   description?: string;
-  people?: PersonInterface[];
+  residentConnection: ResidentConnection;
   population?: number;
   gravity?: string;
   saved?: boolean;
+}
+
+interface ResidentConnection {
+  residents: ResidentInterface[];
 }
 
 type PlanetProps = {
@@ -60,6 +64,15 @@ class PlanetStore {
     const updatedPlanets = this.planets.filter((planet) => planet.id !== id);
     this.planets = updatedPlanets;
   };
+
+  public setResidents = (id: string, residents: ResidentInterface[]) => {
+    this.getPlanet(id).residentConnection.residents = residents;
+  }
+
+  public addResident = (id: string, resident: ResidentInterface) => {
+    this.getPlanet(id).residentConnection.residents.push(resident);
+  }
+
 }
 
 const planetStore = new PlanetStore();

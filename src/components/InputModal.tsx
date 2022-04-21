@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import { useFormik } from "formik";
+import { ResidentInterface } from "../model/Resident";
+
 
 /**
  *  Input modal for adding residents to saved planets.
  *  TODO:
  *    Form validation and confirmation.
- *    Hook up to Stores.
  *    Clear form on save/cancel.
  */
 
@@ -14,33 +15,36 @@ type ModalProps = {
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void;
   show: boolean;
   planetID: string;
+  handleSave: (resident: ResidentInterface) => void;
   //children: React.ReactNode;
 };
 
-const InputModal = ({ handleClose, show, planetID }: ModalProps) => {
+const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => {
   const showHideClassName = show ? "visible" : "hidden";
 
   const formik = useFormik({
     initialValues: {
         name: "",
         gender: "",
-        height: undefined,
-        born: "",
+        height: 0,
+        birthyear: "",
     },
     onSubmit: (values) => {
-      console.log(formik.values.name, formik.values.gender, formik.values.height, formik.values.born, planetID, generateResidentID())
+      const resident: ResidentInterface = {
+        id: generateResidentID(),
+        planetID: planetID,
+        name: formik.values.name,
+        gender: formik.values.gender,
+        height: formik.values.height,
+        birthyear: formik.values.birthyear
+      }
+      handleSave(resident);
     },
   });
 
   const generateResidentID = () => {
     const residentID = planetID + new Date().toLocaleTimeString() + formik.values.name;
     return residentID.replace(/\s/g,'');
-  }
-
-  const [heightType, setHeightType] = useState("text");
-  const switchToNumber = () => {
-    setHeightType("number");
-    console.log(heightType)
   }
 
   return (
@@ -74,9 +78,9 @@ const InputModal = ({ handleClose, show, planetID }: ModalProps) => {
 
             <input 
                 type="text" 
-                name="born" 
+                name="birthyear" 
                 onChange={formik.handleChange} 
-                value={formik.values.born} 
+                value={formik.values.birthyear} 
                 placeholder="Birthyear"
                 className="bg-slate-800 border border-amber-400 rounded p-1"
             />
