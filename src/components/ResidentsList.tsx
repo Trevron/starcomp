@@ -17,7 +17,7 @@ function ResidentsList({planet}: ResidentListProps) {
       <div className="flex flex-wrap gap-3">
         {
             planet.residentConnection.residents?.map((resident) => (
-                <ResidentCard key={resident.id} resident={resident} />
+                <ResidentCard key={resident.name.concat(resident.id)} resident={resident} />
             ))
         }
       </div>
