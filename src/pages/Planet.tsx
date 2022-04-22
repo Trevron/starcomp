@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import InputModal from "../components/InputModal";
 import ResidentsList from "../components/ResidentsList";
 import { ResidentInterface } from "../model/Resident";
+import DescriptionInput from "../components/DescriptionInput"
 
 /*
     Planet details page.
@@ -102,9 +103,25 @@ function PlanetDetails() {
     }
   }
 
+  const [planetSaved, setPlanetSaved] = useState(false);
+
   // Div for the button to add residents
   const [canAdd, setCanAdd] = useState(false);
   const residentButtonClass = canAdd ? "visible" : "hidden";
+  
+  // Input for description
+  const [showDescription, setShowDescription] = useState(false);
+  const showDescriptionForm = () => {
+    setShowDescription(true);
+  }
+  const hideDescriptionForm = () => {
+    setShowDescription(false);
+  }
+
+  // Save description
+  const saveDescription = (description: string) => {
+    planetStore.getPlanet(location.state.id).description = description;
+  }
 
   // Modal for resident input
   const [show, setShow] = useState(false)
@@ -116,11 +133,7 @@ function PlanetDetails() {
   }
 
   // Save the person from the modal
-  // This is indicative of the requirement for rework
   const saveResident = (resident: ResidentInterface) => {
-    // if (planetStore.getPlanet(location.state.id) === undefined) {
-    //   planetStore.setResidents(location.state.id, []);
-    // }
     planetStore.addResident(location.state.id, resident);    
   }
 
@@ -129,7 +142,7 @@ function PlanetDetails() {
   if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">
-        <div className="px-2 w-1/2 flex flex-col">
+        <div className="px-2 lg:w-1/2 md:w-3/4 flex flex-col">
           <h1
             id="loading"
             className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
@@ -152,8 +165,27 @@ function PlanetDetails() {
               
             </div>
             <div>
-              <h2 className="text-amber-600 font-bold">Description</h2>
-              <p>
+              <div className="flex gap-1">
+                <h2 className="text-amber-600 font-bold">Description</h2>
+                <button  
+                  className={`
+                    ${residentButtonClass} 
+                    text-xs text-amber-400 font-bold
+                    min-w-fit w-30 max-h-12 p-1 border border-amber-400 rounded 
+                    hover:bg-amber-400 hover:text-white 
+                    `}
+                  onClick={showDescriptionForm}
+                >
+                Edit
+              </button>
+              </div>
+              <DescriptionInput 
+                handleClose={hideDescriptionForm} 
+                show={showDescription} 
+                currentDescription={searchStore.getSelectedPlanet().description}
+                handleSave={saveDescription}
+              />
+              <p className={showDescription ? "hidden" : "visible"}>
                 {searchStore.getSelectedPlanet().description || "No description."}
               </p>
             </div>

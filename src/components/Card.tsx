@@ -14,7 +14,7 @@ type CardProps = {
 function Card(props: CardProps) {
   const {name, description, climates, diameter} = props.planet;
   return (
-    <div className="lg:w-1/2 w-3/4 h-36 my-5 mx-auto bg-slate-700 shadow-xl rounded-lg text-gray-50 flex flex-wrap flex-col">
+    <div className="lg:w-1/2 w-3/4 min-h-[9rem] my-5 mx-auto bg-slate-700 shadow-xl rounded-lg text-gray-50 flex flex-wrap flex-col">
       <div className="p-2">
         <div className="flex flex-wrap justify-between">
           <h2 className="text-5xl text-amber-400 font-bold">{name}</h2>
