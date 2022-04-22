@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useFormik} from "formik";
 
 type DescriptionInputProps = {
@@ -11,11 +11,14 @@ type DescriptionInputProps = {
 const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: DescriptionInputProps) => {
     const showHideClassName = show ? "visible" : "hidden";
 
+    const [descriptionState, setDescriptionState] = useState(currentDescription || "");
+
     const formik = useFormik({
         initialValues: {
-            description: currentDescription || "",
+            description: descriptionState || "",
         },
         onSubmit: (values) => {
+          setDescriptionState(formik.values.description);
           handleSave(formik.values.description);
         },
       });

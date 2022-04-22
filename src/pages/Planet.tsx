@@ -120,7 +120,7 @@ function PlanetDetails() {
 
   // Save description
   const saveDescription = (description: string) => {
-    planetStore.getPlanet(location.state.id).description = description;
+    planetStore.setDescription(location.state.id, description);
   }
 
   // Modal for resident input
@@ -182,7 +182,7 @@ function PlanetDetails() {
               <DescriptionInput 
                 handleClose={hideDescriptionForm} 
                 show={showDescription} 
-                currentDescription={searchStore.getSelectedPlanet().description}
+                currentDescription={planetStore.getPlanet(location.state.id).description}
                 handleSave={saveDescription}
               />
               <p className={showDescription ? "hidden" : "visible"}>

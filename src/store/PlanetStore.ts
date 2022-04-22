@@ -73,6 +73,10 @@ class PlanetStore {
     this.getPlanet(id).residentConnection.residents.push(resident);
   }
 
+  public setDescription = (id: string, description: string) => {
+    this.getPlanet(id).description = description;
+  }
+
 }
 
 const planetStore = new PlanetStore();

@@ -16,7 +16,6 @@ type ModalProps = {
   show: boolean;
   planetID: string;
   handleSave: (resident: ResidentInterface) => void;
-  //children: React.ReactNode;
 };
 
 const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => {
@@ -39,6 +38,7 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
         birthyear: formik.values.birthyear
       }
       handleSave(resident);
+      formik.resetForm();
     },
   });
 
