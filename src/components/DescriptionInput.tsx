@@ -24,7 +24,7 @@ const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: D
 
   return (
     <div className={show ? "visible" : "hidden"}>
-        <form className="flex gap-1" onSubmit={formik.handleSubmit}>
+        <form className="mt-1 flex gap-1" onSubmit={formik.handleSubmit}>
             <input 
                 type="text" 
                 name="description" 
@@ -32,7 +32,7 @@ const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: D
                 value={formik.values.description} 
                 className="w-full bg-slate-700 p-1 border border-amber-600 rounded focus:border-amber-400 focus:outline-none"
             />
-            <button type="submit" onClick={handleClose} className={`border border-amber-400 rounded p-1`}>
+            <button type="submit" onClick={handleClose} className={`text-amber-400 font-bold border border-amber-400 rounded p-1`}>
                 Save
             </button>
         </form>

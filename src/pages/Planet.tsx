@@ -13,7 +13,6 @@ import DescriptionInput from "../components/DescriptionInput"
     Planet details page.
     TODO:
       Styling.
-      Disable delete while modal is open.
       Huge rework. Need to decouple a lot of things on this page.
 */
 
@@ -70,7 +69,8 @@ function PlanetDetails() {
   }, []);
 
   const handleSavePlanetClick = () => {
-    if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
+    // Can only delete if no updates are in progress.
+    if (planetSaved && !showDescriptionForm && !showModal) {
       planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
       setPlanetSaved(false);   
     } else {
@@ -80,12 +80,9 @@ function PlanetDetails() {
   }
   
   // Input for description
-  const [showDescription, setShowDescription] = useState(false);
-  const showDescriptionForm = () => {
-    setShowDescription(true);
-  }
-  const hideDescriptionForm = () => {
-    setShowDescription(false);
+  const [showDescriptionForm, setShowDescriptionForm] = useState(false);
+  const descriptionFormHandler = () => {
+    setShowDescriptionForm(!showDescriptionForm);
   }
 
   // Save description
@@ -143,18 +140,18 @@ function PlanetDetails() {
                     min-w-fit w-30 max-h-12 p-1 border border-amber-400 rounded 
                     hover:bg-amber-400 hover:text-white 
                     `}
-                  onClick={showDescriptionForm}
+                  onClick={descriptionFormHandler}
                 >
-                Edit
+                {showDescriptionForm ? "Cancel" : "Edit"}
               </button>
               </div>
               <DescriptionInput 
-                handleClose={hideDescriptionForm} 
-                show={showDescription} 
+                handleClose={descriptionFormHandler} 
+                show={showDescriptionForm} 
                 currentDescription={planetStore.getPlanet(location.state.id).description}
                 handleSave={saveDescription}
               />
-              <p className={showDescription ? "hidden" : "visible"}>
+              <p className={showDescriptionForm ? "hidden" : "visible"}>
                 {searchStore.getSelectedPlanet().description || "No description."}
               </p>
             </div>
