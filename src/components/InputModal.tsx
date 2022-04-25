@@ -7,7 +7,7 @@ import { ResidentInterface } from "../model/Resident";
  *  Input modal for adding residents to saved planets.
  *  TODO:
  *    Form validation and confirmation.
- *    Clear form on save/cancel.
+ *    
  */
 
 
@@ -19,7 +19,6 @@ type ModalProps = {
 };
 
 const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => {
-  const showHideClassName = show ? "visible" : "hidden";
 
   const formik = useFormik({
     initialValues: {
@@ -49,11 +48,12 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
 
   return (
     <div 
-      className={`${showHideClassName} 
-      text-gray-50 bg-slate-700 
-      rounded-xl border border-amber-400
-      absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-      p-2`}
+      className={`
+        ${show ? "visible" : "hidden"} 
+        text-gray-50 bg-slate-700 
+        rounded-xl border border-amber-400
+        absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        p-2`}
     >
       <section className="flex flex-col justify-items-center mx-10 mb-5">
         <h1 className="text-xl font-bold text-amber-400 self-center">Resident Details</h1>

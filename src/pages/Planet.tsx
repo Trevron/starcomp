@@ -48,66 +48,36 @@ function PlanetDetails() {
   }
   `;
 
+  const [loaded, setLoaded] = useState(false);
+  const [planetSaved, setPlanetSaved] = useState(false);
+  
   // Check if planet is already saved, if not Query the SWAPI
   useEffect(() => {
     if (planetStore.planetExists(location.state.id)) {
       searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
-      setCanAdd(true);
-      doneLoading();
+      setPlanetSaved(true);
+      setLoaded(true);
     } else {
       request(
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
         planetQuery
       ).then((data) => {
         searchStore.setSelectedPlanet(data.planet);
-        doneLoading();
+        setLoaded(true);
       })
       .catch(error => console.log("There was a problem requesting data.", error));
     }
   }, []);
 
-  function doneLoading() {
-    toggleSaveButton();
-    const main = document.getElementById("planet-details");
-    const loading = document.getElementById("loading");
-    main?.classList.remove("hidden");
-    loading?.classList.add("hidden");
-  }
-
   const handleSavePlanetClick = () => {
-    // const savePlanetButton = document.getElementById("save-planet-button");
     if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
-      // Remove planet from planet store
       planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
-      setCanAdd(false);   
+      setPlanetSaved(false);   
     } else {
-      // Add planet to planet store
       planetStore.addPlanet(searchStore.getSelectedPlanet());
-      setCanAdd(true);
-    }
-    toggleSaveButton();
-  }
-
-  function toggleSaveButton() {
-    const savePlanetButton = document.getElementById("save-planet-button");
-    if (savePlanetButton !== null) {
-      if (planetStore.planetExists(searchStore.getSelectedPlanet().id)) {
-        savePlanetButton.classList.add("bg-red-800");
-        savePlanetButton.classList.remove("bg-emerald-800");
-        savePlanetButton.textContent = "Delete";
-      } else {
-        savePlanetButton.classList.add("bg-emerald-800");
-        savePlanetButton.classList.remove("bg-red-800");
-        savePlanetButton.textContent = "Save";
-      }
+      setPlanetSaved(true);
     }
   }
-
-  const [planetSaved, setPlanetSaved] = useState(false);
-
-  // Div for the button to add residents
-  const [canAdd, setCanAdd] = useState(false);
-  const residentButtonClass = canAdd ? "visible" : "hidden";
   
   // Input for description
   const [showDescription, setShowDescription] = useState(false);
@@ -124,12 +94,9 @@ function PlanetDetails() {
   }
 
   // Modal for resident input
-  const [show, setShow] = useState(false)
-  const showModal = () => {
-    setShow(true);
-  }
-  const hideModal = () => {
-    setShow(false);
+  const [showModal, setShowModal] = useState(false)
+  const showModalHandler = () => {
+    setShowModal(true);
   }
 
   // Save the person from the modal
@@ -137,19 +104,18 @@ function PlanetDetails() {
     planetStore.addResident(location.state.id, resident);    
   }
 
-
   // Make sure planet object is working before render.
-  if (searchStore.getSelectedPlanet().climates !== undefined) {
+  if (searchStore.getSelectedPlanet() !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">
         <div className="px-2 lg:w-1/2 md:w-3/4 flex flex-col">
           <h1
             id="loading"
-            className="text-4xl font-bold text-amber-400 flex justify-center animate-ping"
+            className={`${loaded ? "hidden" : "visible"} text-4xl font-bold text-amber-400 flex justify-center animate-ping`}
           >
             Loading
           </h1>
-          <div id="planet-details" className="hidden text-gray-50">
+          <div id="planet-details" className={`${loaded ? "visible" : "hidden"} text-gray-50`}>
             <div className="flex mb-2 justify-between gap-x-1 flex-col md:flex-row">
               <h1 className="text-5xl text-amber-400 font-bold">
                 {searchStore.getSelectedPlanet().name}
@@ -158,9 +124,12 @@ function PlanetDetails() {
                 type="button"
                 id="save-planet-button"
                 onClick={handleSavePlanetClick} 
-                className="text-gray-50 bg-emerald-800 w-24 min-w-[6rem] max-h-12 font-bold border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1"
+                className={`
+                  ${planetSaved ? "bg-red-800" : "bg-emerald-800"} 
+                  text-gray-50 w-24 min-w-[6rem] max-h-12 font-bold 
+                  border border-amber-400 rounded hover:bg-amber-400 hover:text-white p-1`}
               >
-                Save Planet
+                {planetSaved ? "Delete" : "Save"}
               </button>
               
             </div>
@@ -169,7 +138,7 @@ function PlanetDetails() {
                 <h2 className="text-amber-600 font-bold">Description</h2>
                 <button  
                   className={`
-                    ${residentButtonClass} 
+                    ${planetSaved ? "visible" : "hidden"} 
                     text-xs text-amber-400 font-bold
                     min-w-fit w-30 max-h-12 p-1 border border-amber-400 rounded 
                     hover:bg-amber-400 hover:text-white 
@@ -219,9 +188,9 @@ function PlanetDetails() {
               <ResidentsList planet={searchStore.getSelectedPlanet()} />
           </div>
 
-          <div id="resident-add" className={residentButtonClass}>
-            <InputModal show={show} handleClose={hideModal} planetID={location.state.id} handleSave={saveResident} />
-            <button type="button" onClick={showModal} className="text-amber-400 my-2 font-bold p-2 border border-amber-400 rounded hover:bg-amber-400 hover:text-gray-50">
+          <div id="resident-add" className={planetSaved ? "visible" : "hidden"}>
+            <InputModal show={showModal} handleClose={() => setShowModal(false)} planetID={location.state.id} handleSave={saveResident} />
+            <button type="button" onClick={showModalHandler} className="text-amber-400 my-2 font-bold p-2 border border-amber-400 rounded hover:bg-amber-400 hover:text-gray-50">
               Add Resident
             </button>
           </div>
@@ -234,7 +203,7 @@ function PlanetDetails() {
   } else {
     return (
       <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
-        Loading
+        Error
       </h1>
     )
   }

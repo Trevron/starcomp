@@ -9,7 +9,6 @@ type DescriptionInputProps = {
 }
 
 const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: DescriptionInputProps) => {
-    const showHideClassName = show ? "visible" : "hidden";
 
     const [descriptionState, setDescriptionState] = useState(currentDescription || "");
 
@@ -24,7 +23,7 @@ const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: D
       });
 
   return (
-    <div className={`${showHideClassName} `}>
+    <div className={show ? "visible" : "hidden"}>
         <form className="flex gap-1" onSubmit={formik.handleSubmit}>
             <input 
                 type="text" 
