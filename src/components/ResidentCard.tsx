@@ -11,7 +11,7 @@ type CardProps = {
   function ResidentCard(props: CardProps) {
     const {name, gender, birthyear, height} = props.resident;
     return (
-      <div className="w-64 min-w-fit p-3 bg-slate-700 shadow-xl rounded-lg text-gray-50 flex flex-col justify-center">
+      <div className="w-3/4 md:w-[30%] p-3 bg-slate-700 shadow-xl rounded-lg text-gray-50 flex flex-col justify-center">
           <h1 key={name} className="text-xl font-bold text-amber-400">{name}</h1>
           <div className="ml-1">
             <div className="flex gap-1">

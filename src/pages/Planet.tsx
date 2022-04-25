@@ -150,7 +150,7 @@ function PlanetDetails() {
             Loading
           </h1>
           <div id="planet-details" className="hidden text-gray-50">
-            <div className="flex justify-between gap-x-1 flex-col md:flex-row">
+            <div className="flex mb-2 justify-between gap-x-1 flex-col md:flex-row">
               <h1 className="text-5xl text-amber-400 font-bold">
                 {searchStore.getSelectedPlanet().name}
               </h1>
@@ -215,7 +215,7 @@ function PlanetDetails() {
             </div>
 
           <div id="resident-cards">
-            <h2 className="text-amber-600 font-bold">Residents</h2>
+            <h2 className="text-amber-600 font-bold mb-1">Residents</h2>
               <ResidentsList planet={searchStore.getSelectedPlanet()} />
           </div>
 
