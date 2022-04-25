@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 function MyPlanetsList() {
   return (
-    <div className="">
+    <div>
       {planetStore.planets.map((planet) => (
         // Regex replaces spaces with underscores
         <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/myplanets"}}>

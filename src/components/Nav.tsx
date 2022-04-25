@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom';
 import {ReactComponent as MenuIcon} from '../menu.svg'
 import {ReactComponent as PlanetIcon} from '../globe.svg'
@@ -9,7 +9,7 @@ import {ReactComponent as SearchIcon} from '../search.svg'
  */
 
 function Nav() {
-    const [navbarOpen, setNavbarOpen] = React.useState(false);
+    const [navbarOpen, setNavbarOpen] = useState(false);
   return (
     <>
         <nav className="sticky top-0 flex flex-wrap items-center justify-between px-2 py-3 bg-slate-700 mb-3">

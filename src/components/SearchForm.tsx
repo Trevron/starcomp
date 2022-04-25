@@ -34,7 +34,7 @@ function SearchForm() {
       sort: "default",
     },
     onSubmit: (values) => {
-      hideDetails();
+      setShowDetails(false);
       request(
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
         allPlanets
@@ -50,25 +50,13 @@ function SearchForm() {
     },
   });
 
-  function showDetails() {
-    const details = document.getElementById("search-details");
-    if (details && details.classList.contains("hidden")) {
-      details.classList.remove("hidden");
-    }
-  }
-
-  function hideDetails() {
-    const details = document.getElementById("search-details");
-    if (details && !details.classList.contains("hidden")) {
-      details.classList.add("hidden");
-    }
-  }
+  const [showDetails, setShowDetails] = useState(false);
 
   return (
     <div className="lg:w-1/2 w-3/4">
       <form onSubmit={formik.handleSubmit}>
         <input
-          onFocus={showDetails}
+          onFocus={() => setShowDetails(true)}
           onChange={formik.handleChange}
           value={formik.values.search}
           type="text"
@@ -96,7 +84,7 @@ function SearchForm() {
         
         <div
           id="search-details"
-          className="
+          className={`
             w-full 
             min-w-96 
             md:max-h-48 
@@ -106,7 +94,7 @@ function SearchForm() {
             rounded 
             flex md:flex-row flex-col justify-between content-center 
             border border-amber-400 
-            hidden"
+            ${showDetails ? "visible" : "hidden"}`}
         >
           <div className="flex flex-wrap flex-col text-amber-400 accent-amber-500 p-2">
             <div className="flex content-center flex-row">
