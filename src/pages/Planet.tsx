@@ -73,7 +73,7 @@ function PlanetDetails() {
     if (planetSaved && !showDescriptionForm && !showModal) {
       planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
       setPlanetSaved(false);   
-    } else {
+    } else if (!planetSaved) {
       planetStore.addPlanet(searchStore.getSelectedPlanet());
       setPlanetSaved(true);
     }
@@ -102,7 +102,7 @@ function PlanetDetails() {
   }
 
   // Make sure planet object is working before render.
-  if (searchStore.getSelectedPlanet() !== undefined) {
+  if (searchStore.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">
         <div className="px-2 lg:w-1/2 md:w-3/4 flex flex-col">
@@ -199,8 +199,9 @@ function PlanetDetails() {
     );
   } else {
     return (
+      // Waiting for graphql request
       <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
-        Error
+        Loading
       </h1>
     )
   }
