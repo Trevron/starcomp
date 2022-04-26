@@ -71,8 +71,10 @@ function PlanetDetails() {
   const handleSavePlanetClick = () => {
     // Can only delete if no updates are in progress.
     if (planetSaved && !showDescriptionForm && !showModal) {
-      planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
-      setPlanetSaved(false);   
+      if (window.confirm("Are you sure you want to delete? \nAll edited information will be lost!")) {
+        planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
+        setPlanetSaved(false);   
+      }
     } else if (!planetSaved) {
       planetStore.addPlanet(searchStore.getSelectedPlanet());
       setPlanetSaved(true);

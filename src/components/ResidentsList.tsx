@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import { PlanetInterface } from "../store/PlanetStore"
-import planetStore from "../store/PlanetStore";
 import ResidentCard from "./ResidentCard";
 
 /**

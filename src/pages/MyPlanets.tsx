@@ -1,6 +1,6 @@
 import React from "react";
 import { request, gql } from "graphql-request";
-import Card from "../components/Card";
+import PlanetCard from "../components/PlanetCard";
 import planetStore from "../store/PlanetStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ function MyPlanetsList() {
       {planetStore.planets.map((planet) => (
         // Regex replaces spaces with underscores
         <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/myplanets"}}>
-          <Card planet={planet} />
+          <PlanetCard planet={planet} />
         </Link>
       ))}
     </div>
