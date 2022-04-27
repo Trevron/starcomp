@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/starcomp/static/css/main.ba6c3374.css",
-    "main.js": "/starcomp/static/js/main.6215c3a0.js",
+    "main.css": "/starcomp/static/css/main.43af79ee.css",
+    "main.js": "/starcomp/static/js/main.488bfcbb.js",
     "static/js/787.3d6cec75.chunk.js": "/starcomp/static/js/787.3d6cec75.chunk.js",
     "index.html": "/starcomp/index.html",
     "static/media/globe_big.svg": "/starcomp/static/media/globe_big.423bd4c79b6121612aeddbad7ccaac96.svg",
@@ -9,12 +9,12 @@
     "static/media/menu.svg": "/starcomp/static/media/menu.644fa295fdd5f662e642ba6bfb084239.svg",
     "static/media/search_big.svg": "/starcomp/static/media/search_big.d672694cd7d1811672b8cf58c5856995.svg",
     "static/media/search.svg": "/starcomp/static/media/search.f9705ffe407455bd10ed6827af98d123.svg",
-    "main.ba6c3374.css.map": "/starcomp/static/css/main.ba6c3374.css.map",
-    "main.6215c3a0.js.map": "/starcomp/static/js/main.6215c3a0.js.map",
+    "main.43af79ee.css.map": "/starcomp/static/css/main.43af79ee.css.map",
+    "main.488bfcbb.js.map": "/starcomp/static/js/main.488bfcbb.js.map",
     "787.3d6cec75.chunk.js.map": "/starcomp/static/js/787.3d6cec75.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba6c3374.css",
-    "static/js/main.6215c3a0.js"
+    "static/css/main.43af79ee.css",
+    "static/js/main.488bfcbb.js"
   ]
 }
