@@ -28,7 +28,7 @@ const MyPlanetsObserver = observer(MyPlanetsList);
 function MyPlanets() {
   return (
     <>
-      <h1 className="flex justify-center text-5xl text-gray-50">My Planets</h1>
+      <h1 className="flex justify-center text-4xl font-bold text-gray-50 uppercase">My Planets</h1>
       <MyPlanetsObserver />
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react'
-import deathstar from '../deathstarish.png'
+import deathstar from '../img/deathstarish.png'
 
 type Props = {}
 
