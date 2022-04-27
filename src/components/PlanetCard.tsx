@@ -20,7 +20,7 @@ function PlanetCard(props: CardProps) {
               flex flex-wrap flex-col 
               hover:translate-x-5 
               hover:border-l-8
-              hover:border-amber-400
+              border-amber-400
               transition-transform ease-in-out duration-150">
       <div className="p-2">
         <div className="flex flex-wrap justify-between">
