@@ -1,9 +1,8 @@
 import React from "react";
-import { request, gql } from "graphql-request";
 import PlanetCard from "../components/PlanetCard";
-import planetStore from "../store/PlanetStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { useRootStore } from "../store/RootStoreProvider";
 
 /**
  *  Observed list of saved planets
@@ -11,9 +10,10 @@ import { Link } from "react-router-dom";
  */
 
 function MyPlanetsList() {
+  const store = useRootStore();
   return (
     <div>
-      {planetStore.planets.map((planet) => (
+      {store.planet.planets.map((planet) => (
         // Regex replaces spaces with underscores
         <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/myplanets"}}>
           <PlanetCard planet={planet} />

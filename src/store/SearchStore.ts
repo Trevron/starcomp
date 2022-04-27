@@ -13,8 +13,6 @@ class SearchStore {
   }
 
   public planets: PlanetInterface[] = [];
-  
-  private selectedPlanet = {} as PlanetInterface;
 
   public setPlanets = (newPlanets: PlanetInterface[]) => {
     this.planets = newPlanets;
@@ -33,14 +31,6 @@ class SearchStore {
     );
     this.planets = filtered;
   };
-
-  public setSelectedPlanet = (currentPlanet: PlanetInterface) => {
-    this.selectedPlanet = currentPlanet;
-  }
-
-  public getSelectedPlanet = () => {
-    return this.selectedPlanet;
-  }
 
   public sortSearch = (sortBy: string) => {
     switch (sortBy) {
@@ -67,5 +57,4 @@ class SearchStore {
   };
 }
 
-const searchStore = new SearchStore();
-export default searchStore;
+export default SearchStore;

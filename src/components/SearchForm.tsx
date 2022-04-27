@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import searchStore from "../store/SearchStore";
 import { request, gql } from "graphql-request";
-import { PlanetInterface } from "../store/PlanetStore";
+import { useRootStore } from "../store/RootStoreProvider";
 
 /*
   Search form component
@@ -27,6 +26,8 @@ const allPlanets = gql`
 `;
 
 function SearchForm() {
+
+  const store = useRootStore();
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -39,11 +40,11 @@ function SearchForm() {
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
         allPlanets
       ).then((data) => {
-        searchStore.setPlanets(data.allPlanets.planets);
-        searchStore.searchInput(formik.values.search.toLowerCase());
-        searchStore.sortSearch(formik.values.sort);
+        store.search.setPlanets(data.allPlanets.planets);
+        store.search.searchInput(formik.values.search.toLowerCase());
+        store.search.sortSearch(formik.values.sort);
         if (formik.values.climate.length > 0) {
-          searchStore.filterSearch(formik.values.climate as []);
+          store.search.filterSearch(formik.values.climate as []);
         }
       })
       .catch(error => console.log("There was a problem retrieving the data.", error));
@@ -52,6 +53,11 @@ function SearchForm() {
 
   const [showDetails, setShowDetails] = useState(false);
 
+  const climateList: string[] = ["arid", "temperate", "tropical", "frozen", "murky", "windy", 
+                        "rocky", "hot", "frigid", "humid", "moist",
+                        "polluted", "unknown", "subartic", "artic", "artifical temperate"
+                      ];
+                    
   return (
     <div className="lg:w-1/2 w-3/4">
       <form onSubmit={formik.handleSubmit}>
@@ -97,166 +103,24 @@ function SearchForm() {
             ${showDetails ? "visible" : "hidden"}`}
         >
           <div className="flex flex-wrap flex-col text-amber-400 accent-amber-500 p-2">
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="arid"
-                name="climate"
-                value="arid"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="arid">Arid</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="temperate"
-                name="climate"
-                value="temperate"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="temperate">Temperate</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="tropical"
-                name="climate"
-                value="tropical"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="tropical">Tropical</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="frozen"
-                name="climate"
-                value="frozen"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="frozen">Frozen</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="murky"
-                name="climate"
-                value="murky"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="murky">Murky</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="windy"
-                name="climate"
-                value="windy"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="windy">Windy</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="artificialTemperate"
-                name="climate"
-                value="artificial temperate"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="artificialTemperate">Artificial</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="hot"
-                name="climate"
-                value="hot"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="hot">Hot</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="frigid"
-                name="climate"
-                value="frigid"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="frigid">Frigid</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="humid"
-                name="climate"
-                value="humid"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="humid">Humid</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="moist"
-                name="climate"
-                value="moist"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="moist">Moist</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="polluted"
-                name="climate"
-                value="polluted"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="polluted">Polluted</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="unknown"
-                name="climate"
-                value="unknown"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="unknown">Unknown</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="subartic"
-                name="climate"
-                value="subartic"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="subartic">Subartic</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="artic"
-                name="climate"
-                value="artic"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="artic">Artic</label>
-            </div>
-            <div className="flex content-center flex-row">
-              <input
-                type="checkbox"
-                id="rocky"
-                name="climate"
-                value="rocky"
-                onChange={formik.handleChange}
-              />
-              <label className="mx-2" htmlFor="rocky">Rocky</label>
-            </div>
+
+            {
+              climateList.map(climateType => {
+                return (
+                  <div key={climateType} className="flex content-center flex-row">
+                    <input
+                      type="checkbox"
+                      id={climateType}
+                      name="climate"
+                      value={climateType}
+                      onChange={formik.handleChange}
+                    />
+                    <label className="mx-2" htmlFor={climateType}>{climateType.charAt(0).toUpperCase().concat(climateType.slice(1))}</label>
+                  </div>
+                )
+              })
+            }
+
           </div>
           <div className="flex flex-col justify-between">
             <select

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
-import planetStore, { PlanetInterface } from "../store/PlanetStore";
 import { request, gql } from "graphql-request";
 import { useLocation, Location } from "react-router-dom";
-import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import InputModal from "../components/InputModal";
 import ResidentsList from "../components/ResidentsList";
 import { ResidentInterface } from "../model/Resident";
 import DescriptionInput from "../components/DescriptionInput"
+import { useRootStore } from "../store/RootStoreProvider";
 
 /*
     Planet details page.
@@ -26,6 +25,8 @@ type LocationProps = {
 function PlanetDetails() {
 
   const location = useLocation() as LocationProps;
+  
+  const store = useRootStore();
 
   const planetQuery = gql`
   query {
@@ -52,8 +53,8 @@ function PlanetDetails() {
   
   // Check if planet is already saved, if not Query the SWAPI
   useEffect(() => {
-    if (planetStore.planetExists(location.state.id)) {
-      searchStore.setSelectedPlanet(planetStore.getPlanet(location.state.id));
+    if (store.planet.planetExists(location.state.id)) {
+      store.planet.setSelectedPlanet(store.planet.getPlanet(location.state.id));
       setPlanetSaved(true);
       setLoaded(true);
     } else {
@@ -61,7 +62,7 @@ function PlanetDetails() {
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
         planetQuery
       ).then((data) => {
-        searchStore.setSelectedPlanet(data.planet);
+        store.planet.setSelectedPlanet(data.planet);
         setLoaded(true);
       })
       .catch(error => console.log("There was a problem requesting data.", error));
@@ -72,11 +73,11 @@ function PlanetDetails() {
     // Can only delete if no updates are in progress.
     if (planetSaved && !showDescriptionForm && !showModal) {
       if (window.confirm("Are you sure you want to delete? \nAll edited information will be lost!")) {
-        planetStore.deletePlanet(searchStore.getSelectedPlanet().id);
+        store.planet.deletePlanet(store.planet.getSelectedPlanet().id);
         setPlanetSaved(false);   
       }
     } else if (!planetSaved) {
-      planetStore.addPlanet(searchStore.getSelectedPlanet());
+      store.planet.addPlanet(store.planet.getSelectedPlanet());
       setPlanetSaved(true);
     }
   }
@@ -89,7 +90,7 @@ function PlanetDetails() {
 
   // Save description
   const saveDescription = (description: string) => {
-    planetStore.setDescription(location.state.id, description);
+    store.planet.setDescription(location.state.id, description);
   }
 
   // Modal for resident input
@@ -100,11 +101,11 @@ function PlanetDetails() {
 
   // Save the person from the modal
   const saveResident = (resident: ResidentInterface) => {
-    planetStore.addResident(location.state.id, resident);    
+    store.planet.addResident(location.state.id, resident);    
   }
 
   // Make sure planet object is working before render.
-  if (searchStore.getSelectedPlanet().climates !== undefined) {
+  if (store.planet.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">
         <div className="px-2 lg:w-1/2 md:w-3/4 flex flex-col">
@@ -117,7 +118,7 @@ function PlanetDetails() {
           <div id="planet-details" className={`${loaded ? "visible" : "hidden"} text-gray-50`}>
             <div className="flex mb-2 justify-between gap-x-1 flex-col md:flex-row">
               <h1 className="text-5xl text-amber-400 font-bold">
-                {searchStore.getSelectedPlanet().name}
+                {store.planet.getSelectedPlanet().name}
               </h1>
               <button 
                 type="button"
@@ -150,21 +151,21 @@ function PlanetDetails() {
               <DescriptionInput 
                 handleClose={descriptionFormHandler} 
                 show={showDescriptionForm} 
-                currentDescription={planetStore.getPlanet(location.state.id).description}
+                currentDescription={store.planet.getPlanet(location.state.id).description}
                 handleSave={saveDescription}
               />
               <p className={showDescriptionForm ? "hidden" : "visible"}>
-                {searchStore.getSelectedPlanet().description || "No description."}
+                {store.planet.getSelectedPlanet().description || "No description."}
               </p>
             </div>
             <div>
               <h2 className="text-amber-600 font-bold">Diameter</h2>
-              <p>{searchStore.getSelectedPlanet().diameter || "Unknown."}</p>
+              <p>{store.planet.getSelectedPlanet().diameter || "Unknown."}</p>
             </div>
             <div>
               <h2 className="text-amber-600 font-bold">Climates</h2>
               <ul>
-                {searchStore.getSelectedPlanet().climates.map((climate) => (
+                {store.planet.getSelectedPlanet().climates.map((climate) => (
                   <li key={climate}>
                     {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
                   </li>
@@ -174,7 +175,7 @@ function PlanetDetails() {
             <div>
               <h2 className="text-amber-600 font-bold">Terrains</h2>
               <ul className="">
-                {searchStore.getSelectedPlanet().terrains.map((terrain) => (
+                {store.planet.getSelectedPlanet().terrains.map((terrain) => (
                   <li key={terrain}>
                     {terrain.charAt(0).toUpperCase().concat(terrain.slice(1))}
                   </li>
@@ -184,7 +185,7 @@ function PlanetDetails() {
 
           <div id="resident-cards">
             <h2 className="text-amber-600 font-bold mb-1">Residents</h2>
-                <ResidentsList planet={searchStore.getSelectedPlanet()} />
+                <ResidentsList planet={store.planet.getSelectedPlanet()} />
           </div>
 
           <div id="resident-add" className={planetSaved ? "visible" : "hidden"}>

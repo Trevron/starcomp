@@ -35,6 +35,16 @@ class PlanetStore {
 
   public planets: PlanetInterface[] = [];
 
+  private selectedPlanet = {} as PlanetInterface;
+
+  public setSelectedPlanet = (currentPlanet: PlanetInterface) => {
+    this.selectedPlanet = currentPlanet;
+  }
+
+  public getSelectedPlanet = () => {
+    return this.selectedPlanet;
+  }
+
   public planetExists(id: string) {
     return (this.planets.some(planet => planet.id === id));
   }
@@ -79,5 +89,4 @@ class PlanetStore {
 
 }
 
-const planetStore = new PlanetStore();
-export default planetStore;
+export default PlanetStore;

@@ -23,7 +23,7 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
     initialValues: {
         name: "",
         gender: "",
-        height: parseInt(""), // Show placeholder text
+        height: parseInt(""), // Show placeholder text but this causes a NaN warning!
         birthyear: "",
     },
     onSubmit: (values) => {

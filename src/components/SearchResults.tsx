@@ -4,6 +4,7 @@ import PlanetCard from "./PlanetCard";
 import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import { useRootStore } from "../store/RootStoreProvider";
 
 /**
  *  Observable list of planets for the Search page and store
@@ -11,9 +12,10 @@ import { Link } from "react-router-dom";
  */
 
 function SearchResultsList() {
+  const store = useRootStore();
   return (
     <div className="">
-      {searchStore.planets.map((planet) => (
+      {store.search.planets.map((planet) => (
         // Regex replaces spaces with underscores
         <Link key={planet.id} to={`/planet/${planet.name.replace(/ /g,"_")}`} state={{id: planet.id, from: "/search"}}> 
           <PlanetCard  planet={planet} />
