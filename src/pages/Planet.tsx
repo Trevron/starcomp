@@ -184,7 +184,7 @@ function PlanetDetails() {
 
           <div id="resident-cards">
             <h2 className="text-amber-600 font-bold mb-1">Residents</h2>
-              <ResidentsList planet={searchStore.getSelectedPlanet()} />
+                <ResidentsList planet={searchStore.getSelectedPlanet()} />
           </div>
 
           <div id="resident-add" className={planetSaved ? "visible" : "hidden"}>

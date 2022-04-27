@@ -12,7 +12,7 @@ type CardProps = {
     const {name, gender, birthyear, height} = props.resident;
     return (
       <div className="
-                w-3/4 md:w-[30%] 
+                w-3/4 md:w-[32%]
                 p-3 
                 bg-slate-700 shadow-xl 
                 rounded-lg 
