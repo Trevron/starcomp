@@ -55,7 +55,7 @@ function SearchForm() {
 
   const climateList: string[] = ["arid", "temperate", "tropical", "frozen", "murky", "windy", 
                         "rocky", "hot", "frigid", "humid", "moist",
-                        "polluted", "unknown", "subartic", "artic", "artifical temperate"
+                        "polluted", "unknown", "subartic", "artic", "artificial temperate"
                       ];
                     
   return (
