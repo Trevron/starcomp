@@ -1,30 +1,25 @@
-import React, {createContext, ReactNode, useContext} from 'react'
+import React, {createContext, ReactNode, useContext, useState} from 'react'
 import RootStore from './RootStore';
 
 type ProviderProps = {
     children: ReactNode;
 }
 
-// Singleton reference to the root store
-let store: RootStore;
-
 // Create context
 const StoreContext = createContext<RootStore | undefined>(undefined);
 
 // Create the provider component
 const RootStoreProvider = ({children}: ProviderProps) => {
-
-    // Only create the store once
-    const root = store ?? new RootStore();
+    const [store, setStore] = useState(new RootStore())
 
   return (
-    <StoreContext.Provider value={root}>{children}</StoreContext.Provider>
+    <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
   )
 }
 
 export default RootStoreProvider;
 
-// Create the hook
+// RootStore Hook
 export const useRootStore = () => {
     const context = useContext(StoreContext);
     if (context === undefined) {

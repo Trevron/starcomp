@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { request, gql } from "graphql-request";
-import { useLocation, Location } from "react-router-dom";
+import { request } from "graphql-request";
+import { useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import InputModal from "../components/InputModal";
 import ResidentsList from "../components/ResidentsList";
 import { ResidentInterface } from "../model/Resident";
 import DescriptionInput from "../components/DescriptionInput"
 import { useRootStore } from "../store/RootStoreProvider";
+import {planetQuery} from "../model/Query";
 
-/*
-    Planet details page.
-    TODO:
-      Styling.
-      Huge rework. Need to decouple a lot of things on this page.
-*/
+/**
+ *  This page shows the planet details.
+ */
 
 type LocationProps = {
   state: {
@@ -28,39 +26,20 @@ function PlanetDetails() {
   
   const store = useRootStore();
 
-  const planetQuery = gql`
-  query {
-    planet(id: "${location.state.id}") {
-      name
-      id
-      climates
-      diameter
-      terrains
-      residentConnection{
-        residents {
-          name
-          gender
-          height
-          birthYear      
-        }
-      }
-    }
-  }
-  `;
-
   const [loaded, setLoaded] = useState(false);
   const [planetSaved, setPlanetSaved] = useState(false);
   
   // Check if planet is already saved, if not Query the SWAPI
   useEffect(() => {
     if (store.planet.planetExists(location.state.id)) {
+      // Set currently selected planet as planet from planet store
       store.planet.setSelectedPlanet(store.planet.getPlanet(location.state.id));
       setPlanetSaved(true);
       setLoaded(true);
     } else {
       request(
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
-        planetQuery
+        planetQuery(location.state.id)
       ).then((data) => {
         store.planet.setSelectedPlanet(data.planet);
         setLoaded(true);
@@ -104,7 +83,7 @@ function PlanetDetails() {
     store.planet.addResident(location.state.id, resident);    
   }
 
-  // Make sure planet object is working before render.
+  // Make sure planet object is set before render.
   if (store.planet.getSelectedPlanet().climates !== undefined) {
     return (
       <div className="w-full flex flex-wrap justify-center">

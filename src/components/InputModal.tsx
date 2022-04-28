@@ -1,9 +1,5 @@
-import React, {useState} from "react";
 import { ErrorMessage, FormikErrors, FormikValues, useFormik } from "formik";
 import { ResidentInterface } from "../model/Resident";
-import { isNumber } from "util";
-
-
 
 /**
  *  Input modal for adding residents to saved planets.   
@@ -23,7 +19,7 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
     initialValues: {
         name: "",
         gender: "",
-        height: parseInt(""), // Show placeholder text but this causes a NaN warning!
+        height: 0, 
         birthyear: "",
     },
     onSubmit: (values) => {
@@ -47,7 +43,7 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
         errors.name = "Required";
       }
       if ((typeof values.height) !== typeof 1) {
-        errors.height = "Enter a number";
+        errors.height = "Enter a number or 0 if unknown";
       };
 
       return errors;
@@ -74,44 +70,64 @@ const InputModal = ({ handleClose, show, planetID, handleSave }: ModalProps) => 
             <label htmlFor="name" className="text-xs font-bold text-red-500">
               {formik.errors.name}
             </label>
-            <input
-                type="text" 
-                name="name" 
-                onChange={formik.handleChange} 
-                value={formik.values.name} 
-                placeholder="Name"
-                className="bg-slate-800 border border-amber-400 rounded p-1"
-            />
-  
-            <input 
-                type="text" 
-                name="gender" 
-                onChange={formik.handleChange} 
-                value={formik.values.gender} 
-                placeholder="Gender"
-                className="bg-slate-800 border border-amber-400 rounded p-1"
-            />
+            <div className="flex items-center">
+              <label htmlFor="name" className="text-sm font-bold text-amber-400 basis-1/5">
+                Name
+              </label>
+              <input
+                  type="text" 
+                  name="name" 
+                  onChange={formik.handleChange} 
+                  value={formik.values.name} 
+                  placeholder="Luke Skywalker"
+                  className="bg-slate-800 border border-amber-400 rounded p-1 basis-4/5"
+              />
+            </div>
 
-            <input 
-                type="text" 
-                name="birthyear" 
-                onChange={formik.handleChange} 
-                value={formik.values.birthyear} 
-                placeholder="Birthyear"
-                className="bg-slate-800 border border-amber-400 rounded p-1"
-            />
+            <div className="flex items-center">
+              <label htmlFor="gender" className="text-sm font-bold text-amber-400 basis-1/5">
+                Gender
+              </label>
+              <input 
+                  type="text" 
+                  name="gender" 
+                  onChange={formik.handleChange} 
+                  value={formik.values.gender} 
+                  placeholder="Male"
+                  className="bg-slate-800 border border-amber-400 rounded p-1 basis-4/5"
+              />
+            </div>
+
+            <div className="flex items-center">
+              <label htmlFor="birthyear" className="text-sm font-bold text-amber-400 basis-1/5">
+                  Birthyear
+              </label>
+              <input 
+                  type="text" 
+                  name="birthyear" 
+                  onChange={formik.handleChange} 
+                  value={formik.values.birthyear} 
+                  placeholder="200 BYOB"
+                  className="bg-slate-800 border border-amber-400 rounded p-1 basis-4/5"
+              />
+            </div>
 
             <label htmlFor="height" className="text-xs font-bold text-red-500">
               {formik.errors.height}
             </label>
-            <input 
-                type="number"
-                name="height" 
-                onChange={formik.handleChange} 
-                value={formik.values.height} 
-                placeholder="Height (cm)"
-                className="bg-slate-800 border border-amber-400 rounded p-1"
-            />
+            <div className="flex items-center">
+              <label htmlFor="height" className="text-sm font-bold text-amber-400 basis-1/5">
+                    Height (cm)
+              </label>
+              <input 
+                  type="number"
+                  name="height" 
+                  onChange={formik.handleChange} 
+                  value={formik.values.height} 
+                  placeholder="0"
+                  className="bg-slate-800 border border-amber-400 rounded p-1 basis-4/5"
+              />
+            </div>
             
             <button 
               type="button" 

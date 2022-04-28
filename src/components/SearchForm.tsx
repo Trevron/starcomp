@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { request, gql } from "graphql-request";
 import { useRootStore } from "../store/RootStoreProvider";
+import { allPlanets } from "../model/Query";
 
 /*
   Search form component
@@ -9,21 +10,6 @@ import { useRootStore } from "../store/RootStoreProvider";
     Clean up hard coded data.
     Fix style.
 */
-
-
-const allPlanets = gql`
-  query {
-    allPlanets {
-      planets {
-        name
-        id
-        climates
-        diameter
-        terrains
-      }
-    }
-  }
-`;
 
 function SearchForm() {
 

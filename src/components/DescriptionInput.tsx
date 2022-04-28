@@ -41,7 +41,7 @@ const DescriptionInput = ({handleClose, show, currentDescription, handleSave}: D
                 className="w-full bg-slate-700 p-1 border border-amber-600 rounded focus:border-amber-400 focus:outline-none"
                 placeholder="Enter a description..."
             />
-            <button type="submit" onClick={() => (window.confirm("Are you want to save?") ? setConfirmed(true) : setConfirmed(false))} 
+            <button type="submit" onClick={() => (window.confirm("Are you sure you want to save?") ? setConfirmed(true) : setConfirmed(false))} 
                 className={`text-amber-400 font-bold border border-amber-400 rounded p-1 hover:text-gray-50 hover:bg-amber-400`}>
                 Save
             </button>
