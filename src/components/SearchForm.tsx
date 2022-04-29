@@ -10,7 +10,10 @@ import { useNavigate, useLocation } from "react-router-dom";
  */
 
 function SearchForm() {
+  const [loading, setLoading] = useState(false);
+
   const store = useRootStore();
+
   const formik = useFormik({
     initialValues: {
       search: "",
@@ -19,18 +22,20 @@ function SearchForm() {
     },
     onSubmit: (values) => {
       setShowDetails(false);
+      setLoading(true);
       request(
         "https://swapi-graphql.netlify.app/.netlify/functions/index",
         allPlanets
       )
         .then((data) => {
+          setLoading(false);
           store.search.setPlanets(data.allPlanets.planets);
           store.search.searchInput(formik.values.search.toLowerCase());
           store.search.sortSearch(formik.values.sort);
           if (formik.values.climate.length > 0) {
             store.search.filterSearch(formik.values.climate as []);
           }
-          // Switch to search page if search was started from MY Planets
+          // Switch to search page if search was started from MyPlanets.
           routeChange();
         })
         .catch((error) =>
@@ -156,6 +161,11 @@ function SearchForm() {
           </div>
         </div>
       </form>
+      <div className={loading ? "visible" : "hidden"}>
+        <h1 className="text-4xl font-bold text-amber-400 flex justify-center animate-ping">
+          Loading
+        </h1>
+      </div>
     </div>
   );
 }
