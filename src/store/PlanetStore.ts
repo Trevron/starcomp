@@ -1,32 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { ResidentInterface } from "../model/Resident";
+import { PlanetInterface } from "../model/Planet";
 
 /**
- * This contains the Planet data model as well as the planet store.
- * TODO:
- *  Restructure the Stores and clean up the data model.
+ * This store holds the currently selected planet and the array of planets saved by the user.
+ * There are several methods for interacting with the saved planets or selected planet.
  */
-
-export interface PlanetInterface {
-  id: string;
-  name: string;
-  climates: string[];
-  diameter: number;
-  terrains: string[];
-  description?: string;
-  residentConnection: ResidentConnection;
-  population?: number;
-  gravity?: string;
-  saved?: boolean;
-}
-
-interface ResidentConnection {
-  residents: ResidentInterface[];
-}
-
-type PlanetProps = {
-  planet: PlanetInterface;
-}
 
 class PlanetStore {
   constructor() {
@@ -39,19 +18,19 @@ class PlanetStore {
 
   public setSelectedPlanet = (currentPlanet: PlanetInterface) => {
     this.selectedPlanet = currentPlanet;
-  }
+  };
 
   public getSelectedPlanet = () => {
     return this.selectedPlanet;
-  }
+  };
 
   public planetExists(id: string) {
-    return (this.planets.some(planet => planet.id === id));
+    return this.planets.some((planet) => planet.id === id);
   }
-  
+
   public getPlanet(id: string): PlanetInterface {
-    if (this.planets.find(planet => planet.id === id)) {
-      return this.planets.find(planet => planet.id === id) as PlanetInterface;
+    if (this.planets.find((planet) => planet.id === id)) {
+      return this.planets.find((planet) => planet.id === id) as PlanetInterface;
     }
     return {} as PlanetInterface;
   }
@@ -77,16 +56,15 @@ class PlanetStore {
 
   public setResidents = (id: string, residents: ResidentInterface[]) => {
     this.getPlanet(id).residentConnection.residents = residents;
-  }
+  };
 
   public addResident = (id: string, resident: ResidentInterface) => {
     this.getPlanet(id).residentConnection.residents.push(resident);
-  }
+  };
 
   public setDescription = (id: string, description: string) => {
     this.getPlanet(id).description = description;
-  }
-
+  };
 }
 
 export default PlanetStore;

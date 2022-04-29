@@ -1,18 +1,19 @@
 import React from "react";
-import { PlanetInterface } from "../store/PlanetStore";
+import { PlanetInterface } from "../model/Planet";
 
 /**
- *  Card for planets
+ *  A simple card for displaying basic planet information.
  */
 
 type CardProps = {
   planet: PlanetInterface;
-}
+};
 
 function PlanetCard(props: CardProps) {
-  const {name, description, climates, diameter} = props.planet;
+  const { name, description, climates, diameter } = props.planet;
   return (
-    <div className="
+    <div
+      className="
               lg:w-1/2 w-3/4 min-h-[9rem] 
               my-5 mx-auto 
               bg-slate-700 shadow-xl rounded-lg 
@@ -21,7 +22,8 @@ function PlanetCard(props: CardProps) {
               hover:translate-x-5 
               hover:border-l-8
               border-amber-400
-              transition-transform ease-in-out duration-150">
+              transition-transform ease-in-out duration-150"
+    >
       <div className="p-2">
         <div className="flex flex-wrap justify-between">
           <h2 className="text-5xl text-amber-400 font-bold">{name}</h2>
@@ -30,7 +32,9 @@ function PlanetCard(props: CardProps) {
               <h3 className="font-bold text-amber-600">Climates</h3>
               <ul>
                 {climates.map((climate) => (
-                  <li key={climate}>{climate.charAt(0).toUpperCase().concat(climate.slice(1))}</li>
+                  <li key={climate}>
+                    {climate.charAt(0).toUpperCase().concat(climate.slice(1))}
+                  </li>
                 ))}
               </ul>
             </div>

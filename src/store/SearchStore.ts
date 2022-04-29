@@ -1,10 +1,9 @@
 import { makeAutoObservable } from "mobx";
-import { PlanetInterface } from "./PlanetStore";
+import { PlanetInterface } from "../model/Planet";
 
 /**
- *  Search store and data model.
- *  TODO:
- *    Restructure and simplify Stores.  
+ * This store holds the array of planets from queried search results.
+ * There are several methods used to sort and filter search results.
  */
 
 class SearchStore {

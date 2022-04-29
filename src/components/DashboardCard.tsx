@@ -1,5 +1,9 @@
 import React from "react";
 
+/**
+ * This is a card for home/landing page dashboard.
+ */
+
 type DashProps = {
   icon: JSX.Element;
   name: string;

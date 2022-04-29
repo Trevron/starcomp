@@ -5,8 +5,7 @@ import searchStore from "../store/SearchStore";
 import SearchResults from "../components/SearchResults";
 
 /**
- *  Search page
- * 
+ * This page allows access to the search form as well as hosting the search results.
  */
 
 function Search() {

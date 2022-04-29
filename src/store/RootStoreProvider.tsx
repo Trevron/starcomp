@@ -1,6 +1,10 @@
 import React, {createContext, ReactNode, useContext, useState} from 'react'
 import RootStore from './RootStore';
 
+/**
+ * This file contains the context, provider, and hook to use the RootStore.
+ */
+
 type ProviderProps = {
     children: ReactNode;
 }
