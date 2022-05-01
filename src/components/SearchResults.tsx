@@ -1,7 +1,5 @@
 import React from "react";
-import { request, gql } from "graphql-request";
 import PlanetCard from "./PlanetCard";
-import searchStore from "../store/SearchStore";
 import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
 import { useRootStore } from "../store/RootStoreProvider";

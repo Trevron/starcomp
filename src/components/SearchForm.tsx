@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { request, gql } from "graphql-request";
+import { request } from "graphql-request";
 import { useRootStore } from "../store/RootStoreProvider";
 import { allPlanets } from "../model/Query";
 import { useNavigate, useLocation } from "react-router-dom";

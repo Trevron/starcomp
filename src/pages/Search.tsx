@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { gql, request } from "graphql-request";
+import React from "react";
 import SearchForm from "../components/SearchForm";
-import searchStore from "../store/SearchStore";
 import SearchResults from "../components/SearchResults";
 
 /**

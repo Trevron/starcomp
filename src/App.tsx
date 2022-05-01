@@ -1,17 +1,11 @@
 import React from "react";
-
 import "./App.css";
-import ComingSoon from "./pages/ComingSoon";
 import { Route, Routes } from "react-router-dom";
 import Nav from "./components/Nav";
-
 import Search from "./pages/Search";
 import MyPlanets from "./pages/MyPlanets";
 import Planet from "./pages/Planet";
-import planetStore from "./store/PlanetStore";
 import Dashboard from "./pages/Dashboard";
-
-
 
 function App() {
   return (
