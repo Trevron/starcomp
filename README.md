@@ -6,7 +6,7 @@ A planetary compendium for Star Wars.
 - View planetary details.
 - View planet's residents and add new ones.
 
-Try it out <a href="https://trevron.github.io/starcomp">here</a>!
+Try it out <a href="https://trev-sm.github.io/starcomp">here</a>!
 
 ## Libraries
 ### React with Typescript
